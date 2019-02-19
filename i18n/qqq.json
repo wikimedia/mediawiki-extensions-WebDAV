@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"webdav-desc": "Description text for [[Special:Version]]",
+	"webdavmanager": "Name of the a special page that allows management of the WebDAV entry point",
+	"webdav-ns-main": "Label for the main namespace. This is also used as a folder name so it must not contain any invalid filesystem characters",
+	"webdav-default-edit-comment": "Text of the edit comment in revision history in case a user edits a page with WebDAV",
+	"webdav-default-delete-comment": "Text of the edit comment in revision history in case a user deletes a page with WebDAV",
+	"webdav-default-move-comment": "Text of the edit comment in revision history in case a user renames a page with WebDAV",
+	"prefs-webdav": "Label for a fieldset on [[Special:Preferences]]",
+	"webdav-statictoken-prefs": "Label of a field on [[Special:Preferences]] that shows the access URL for an user",
+	"webdav-statictoken-prefs-help": "Help text of a field on [[Special:Preferences]] that shows the access URL for an user"
+}

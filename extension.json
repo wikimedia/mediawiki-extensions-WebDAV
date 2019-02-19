@@ -1,0 +1,103 @@
+{
+	"name": "WebDAV",
+	"version": "3.0.1",
+	"author": [
+		"Robert Vogel (Hallo Welt! GmbH)",
+		"Dejan Savuljesku (Hallo Welt! GmbH)"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:WebDAV",
+	"descriptionmsg": "webdav-desc",
+	"type": "other",
+	"license-name": "GPL-3.0-only",
+	"attributes": {
+		"BlueSpicePrivacy": {
+			"Handlers": [
+				"\\MediaWiki\\Extension\\WebDAV\\Privacy\\Handler"
+			]
+		}
+	},
+	"callback": "\\MediaWiki\\Extension\\WebDAV\\Extension::onRegistration",
+	"ServiceWiringFiles": [
+		"includes/WebDAVWiring.php"
+	],
+	"MessagesDirs": {
+		"WebDAV": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"WebDAVAlias": "languages/WebDAV.alias.php"
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\WebDAV\\": "src/"
+	},
+	"AutoloadClasses": {
+		"WebDAVHooks": "includes/WebDAVHooks.php",
+		"WebDAVMediaWikiDBLockBackend": "includes/Locks/Backend/WebDAVMediaWikiDBLockBackend.php",
+		"WebDAVMediaWikiAuthBackend": "includes/Auth/WebDAVMediaWikiAuthBackend.php",
+		"WebDAVNamespacesCollection": "includes/WebDAVNamespacesCollection.php",
+		"WebDAVPagesCollection": "includes/WebDAVPagesCollection.php",
+		"WebDAVPageFile": "includes/WebDAVPageFile.php",
+		"WebDAVFilesCollection": "includes/WebDAVFilesCollection.php",
+		"WebDAVFileFile": "includes/WebDAVFileFile.php",
+		"SpecialWebDAVManager": "includes/specials/SpecialWebDAVManager.php",
+		"WebDAVUrlProvider": "includes/WebDAVUrlProvider.php",
+		"WebDAVTokenAuthBackend": "includes/Auth/WebDAVTokenAuthBackend.php",
+		"WebDAVTokenizer": "includes/WebDAVTokenizer.php",
+		"WebDAVHelper": "includes/WebDAVHelper.php",
+		"WebDAVTempFilePlugin": "includes/WebDAVTempFilePlugin.php"
+	},
+	"Hooks": {
+		"LoadExtensionSchemaUpdates": "WebDAVHooks::onLoadExtensionSchemaUpdates",
+		"WebDAVPlugins": "WebDAVHooks::onWebDAVPlugins",
+		"WebDAVLocksUnlock": "WebDAVHooks::onWebDAVLocksUnlock",
+		"GetPreferences": "WebDAVHooks::onGetPreferences"
+	},
+	"config_prefix": "eg",
+	"config": {
+		"WebDAVRootNode": {
+			"value": "WebDAVNamespacesCollection"
+		},
+		"WebDAVAuthType": {
+			"value": 0
+		},
+		"WebDAVBaseUri": {
+			"value": ""
+		},
+		"WebDAVUrlBaseUri": {
+			"value": ""
+		},
+		"WebDAVSkipTalkNS": {
+			"value": false
+		},
+		"WebDAVSkipNamespaces": {
+			"value": [ -1 ]
+		},
+		"WebDAVNamespaceCollections": {
+			"value": {}
+		},
+		"WebDAVInvalidFileNameCharsRegEx": {
+			"@HINT": "HINT: http://sabre.io/dav/character-encoding/",
+			"value": "#[:|/|\\\\\\|\\*|\\?|\"|\\||\\#|<|>]#si"
+		},
+		"WebDAVLockTimeOut": {
+			"@HINT": "30 Minutes",
+			"value": 1800
+		},
+		"WebDAVTokenExpiration": {
+			"@HINT": "24 Hours",
+			"value": 86400
+		},
+		"WebDAVStaticTokenExpiration": {
+			"value": 2
+		},
+		"WebDAVUserNameAsStaticToken": {
+			"value": false
+		},
+		"WebDAVInvalidateTokenOnUnlock": {
+			"value": true
+		}
+	},
+	"load_composer_autoloader": true,
+	"manifest_version": 2
+}

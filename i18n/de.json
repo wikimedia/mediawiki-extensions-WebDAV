@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"webdav-desc": "Stellt die Inhalte des Wikis über einen WebDAV-Endpunkt zur Verfügung",
+	"webdav-ns-main": "(Seiten)",
+	"webdavmanager": "WebDAV Verwaltung",
+	"webdav-default-edit-comment": "Über WebDAV bearbeitet",
+	"webdav-default-delete-comment": "Über WebDAV gelöscht",
+	"webdav-default-move-comment": "Über WebDAV verschoben",
+	"prefs-webdav": "WebDAV",
+	"webdav-statictoken-prefs": "WebDAV statische URL",
+	"webdav-statictoken-prefs-help": "Verwenden Sie diese URL, um das WebDAV-Netzlaufwerk zu verbinden"
+}

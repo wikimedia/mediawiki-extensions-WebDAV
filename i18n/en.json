@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"webdav-desc": "Adds a WebDAV endpoint that exposes the wiki content",
+	"webdavmanager": "WebDAV manager",
+	"webdav-ns-main": "(Pages)",
+	"webdav-default-edit-comment": "Edited through WebDAV",
+	"webdav-default-delete-comment": "Deleted through WebDAV",
+	"webdav-default-move-comment": "Moved through WebDAV",
+	"prefs-webdav": "WebDAV",
+	"webdav-statictoken-prefs": "WebDAV static URL",
+	"webdav-statictoken-prefs-help": "Use this URL to mount WebDAV network drive"
+}
