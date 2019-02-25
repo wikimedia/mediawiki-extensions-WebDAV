@@ -33,8 +33,7 @@ class WebDAVHooks {
 	 * @return true
 	 */
 	public static function onWebDAVPlugins( $server, &$plugins ) {
-		$config = \MediaWiki\MediaWikiServices::getInstance()
-			->getConfigFactory()->makeConfig( 'wg' );
+		$config = \MediaWiki\MediaWikiServices::getInstance()->getMainConfig();
 		$requestContext = RequestContext::getMain();
 		$webDAVTokenizer = \MediaWiki\MediaWikiServices::getInstance()->getService( 'WebDAVTokenizer' );
 
@@ -62,8 +61,7 @@ class WebDAVHooks {
 	 * @return true
 	 */
 	public static function onWebDAVLocksUnlock( $success, $lockInfo ) {
-		$config = \MediaWiki\MediaWikiServices::getInstance()
-			->getConfigFactory()->makeConfig( 'wg' );
+		$config = \MediaWiki\MediaWikiServices::getInstance()->getMainConfig();
 		if ( $config->get( 'WebDAVAuthType' ) !== WEBDAV_AUTH_TOKEN ) {
 			return true;
 		}
@@ -88,8 +86,7 @@ class WebDAVHooks {
 	 * @return bool
 	 */
 	public static function onGetPreferences( User $user, array &$preferences ) {
-		$config = \MediaWiki\MediaWikiServices::getInstance()
-			->getConfigFactory()->makeConfig( 'wg' );
+		$config = \MediaWiki\MediaWikiServices::getInstance()->getMainConfig();
 		if ( $config->get( 'WebDAVAuthType' ) !== WEBDAV_AUTH_TOKEN ) {
 			return true;
 		}
