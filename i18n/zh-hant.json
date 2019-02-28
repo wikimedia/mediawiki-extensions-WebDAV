@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kly"
+		]
+	},
+	"webdav-desc": "添加 WebDAV 端點來揭露 wiki 內容",
+	"webdavmanager": "WebDAV 管理",
+	"webdav-ns-main": "（頁面）",
+	"webdav-default-edit-comment": "透過 WebDAV 編輯",
+	"webdav-default-delete-comment": "透過 WebDAV 刪除",
+	"webdav-default-move-comment": "透過 WebDAV 移動",
+	"prefs-webdav": "WebDAV",
+	"webdav-statictoken-prefs": "WebDAV 靜態 URL",
+	"webdav-statictoken-prefs-help": "使用此 URL 來掛載 WebDAV 網路磁碟"
+}

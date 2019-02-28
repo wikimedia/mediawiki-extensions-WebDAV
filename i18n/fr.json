@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gomoko"
+		]
+	},
+	"webdav-desc": "Ajoute un point de terminaison WebDAV qui expose le contenu du wiki",
+	"webdavmanager": "Gestionnaire WebDAV",
+	"webdav-ns-main": "(Pages)",
+	"webdav-default-edit-comment": "Modifié via WebDAV",
+	"webdav-default-delete-comment": "Supprimé via WebDAV",
+	"webdav-default-move-comment": "Déplacé via WebDAV",
+	"prefs-webdav": "WebDAV",
+	"webdav-statictoken-prefs": "URL statique de WebDAV",
+	"webdav-statictoken-prefs-help": "Utiliser cette URL pour monter le lecteur réseau WebDAV"
+}

@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Vlad5250"
+		]
+	},
+	"webdav-desc": "Додає кінцеву точку WebDAV, що викладає контент вікі",
+	"webdavmanager": "Менеджер WebDAV",
+	"webdav-ns-main": "(Сторінки)",
+	"webdav-default-edit-comment": "Відредаговано через WebDAV",
+	"webdav-default-delete-comment": "Видалено через WebDAV",
+	"webdav-default-move-comment": "Перейменовано через WebDAV",
+	"prefs-webdav": "WebDAV",
+	"webdav-statictoken-prefs": "Статична URL-адреса для WebDAV",
+	"webdav-statictoken-prefs-help": "Використайте цю URL-адресу, щоб налаштувати мережевий пристрій WebDAV"
+}

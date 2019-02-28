@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"ديفيد"
+		]
+	},
+	"webdav-desc": "يضيف نقطة نهاية WebDAV التي تعرض محتوى الويكي",
+	"webdavmanager": "مدير WebDAV",
+	"webdav-ns-main": "(صفحات)",
+	"webdav-default-edit-comment": "تم التعديل عبر WebDAV",
+	"webdav-default-delete-comment": "تم الحذف عبر WebDAV",
+	"webdav-default-move-comment": "تم النقل عبر WebDAV",
+	"prefs-webdav": "WebDAV",
+	"webdav-statictoken-prefs": "مسار WebDAV ثابت",
+	"webdav-statictoken-prefs-help": "استخدم هذا المسار لتحميل محرك أقراص شبكة WebDAV"
+}

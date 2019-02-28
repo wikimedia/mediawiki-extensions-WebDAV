@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hedda"
+		]
+	},
+	"webdav-desc": "Viki içeriğini gösteren bir WebDAV bitiş noktası ekler",
+	"webdavmanager": "WebDAV yöneticisi",
+	"webdav-ns-main": "(Sayfalar)",
+	"webdav-default-edit-comment": "WebDAV ile düzenlendi",
+	"webdav-default-delete-comment": "WebDAV ile silindi",
+	"webdav-default-move-comment": "WebDAV ile taşındı",
+	"prefs-webdav": "WebDAV",
+	"webdav-statictoken-prefs": "WebDAV statik URL",
+	"webdav-statictoken-prefs-help": "WebDAV ağ sürücüsünü bağlamak için bu URL'yi kullanın"
+}

@@ -1,7 +1,5 @@
 {
-	"@metadata": {
-		"authors": []
-	},
+	"@metadata": [],
 	"webdav-desc": "Description text for [[Special:Version]]",
 	"webdavmanager": "Name of the a special page that allows management of the WebDAV entry point",
 	"webdav-ns-main": "Label for the main namespace. This is also used as a folder name so it must not contain any invalid filesystem characters",

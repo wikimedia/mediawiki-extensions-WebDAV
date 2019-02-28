@@ -1,10 +1,8 @@
 {
-	"@metadata": {
-		"authors": []
-	},
+	"@metadata": [],
 	"webdav-desc": "Stellt die Inhalte des Wikis über einen WebDAV-Endpunkt zur Verfügung",
-	"webdav-ns-main": "(Seiten)",
 	"webdavmanager": "WebDAV Verwaltung",
+	"webdav-ns-main": "(Seiten)",
 	"webdav-default-edit-comment": "Über WebDAV bearbeitet",
 	"webdav-default-delete-comment": "Über WebDAV gelöscht",
 	"webdav-default-move-comment": "Über WebDAV verschoben",

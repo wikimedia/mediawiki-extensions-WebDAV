@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ykhwong"
+		]
+	},
+	"webdavmanager": "WebDAV 관리자",
+	"webdav-ns-main": "(문서)",
+	"webdav-default-edit-comment": "WebDAV를 통해 편집됨",
+	"webdav-default-delete-comment": "WebDAV를 통해 삭제됨",
+	"webdav-default-move-comment": "WebDAV를 통해 이동됨",
+	"prefs-webdav": "WebDAV"
+}

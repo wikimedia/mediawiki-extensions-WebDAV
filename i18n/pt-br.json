@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eduardo Addad de Oliveira"
+		]
+	},
+	"webdav-desc": "Adiciona um ponto final WebDAV que expõe o conteúdo do wiki",
+	"webdavmanager": "Gerente de WebDAV",
+	"webdav-ns-main": "(Páginas)",
+	"webdav-default-edit-comment": "Editado através do WebDAV",
+	"webdav-default-delete-comment": "Excluído pelo WebDAV",
+	"webdav-default-move-comment": "Movido pelo WebDAV",
+	"prefs-webdav": "WebDAV",
+	"webdav-statictoken-prefs": "URL estático do WebDAV",
+	"webdav-statictoken-prefs-help": "Use este URL para montar a unidade de rede do WebDAV"
+}
