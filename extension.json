@@ -9,6 +9,9 @@
 	"descriptionmsg": "webdav-desc",
 	"type": "other",
 	"license-name": "GPL-3.0-only",
+	"requires": {
+		"MediaWiki": ">= 1.31.0"
+	},
 	"attributes": {
 		"BlueSpicePrivacy": {
 			"Handlers": [
