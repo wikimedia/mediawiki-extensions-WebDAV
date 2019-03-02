@@ -1,6 +1,10 @@
 {
-	"@metadata": [],
-	"webdav-desc": "Description text for [[Special:Version]]",
+	"@metadata": {
+		"authors": [
+			"Umherirrender"
+		]
+	},
+	"webdav-desc": "{{desc|name=WebDAV|url=https://www.mediawiki.org/wiki/Extension:WebDAV}}",
 	"webdavmanager": "Name of the a special page that allows management of the WebDAV entry point",
 	"webdav-ns-main": "Label for the main namespace. This is also used as a folder name so it must not contain any invalid filesystem characters",
 	"webdav-default-edit-comment": "Text of the edit comment in revision history in case a user edits a page with WebDAV",
