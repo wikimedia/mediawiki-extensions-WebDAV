@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Shirayuki"
+		]
+	},
+	"webdav-ns-main": "(ページ)",
+	"prefs-webdav": "WebDAV",
+	"webdav-statictoken-prefs": "WebDAV 固定 URL"
+}
