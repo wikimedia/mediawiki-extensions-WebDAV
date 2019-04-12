@@ -32,7 +32,7 @@ class WebDAVMediaWikiDBLockBackend extends \Sabre\DAV\Locks\Backend\AbstractBack
 		}
 
 		if ( $returnChildLocks ) {
-			$conds[] = 'wdl_uri '.$dbr->buildLike(
+			$conds[] = 'wdl_uri ' . $dbr->buildLike(
 				$uri,
 				'/',
 				$dbr->anyString()

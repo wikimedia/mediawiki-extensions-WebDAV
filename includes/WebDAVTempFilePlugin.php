@@ -53,7 +53,6 @@ class WebDAVTempFilePlugin extends \Sabre\DAV\TemporaryFileFilterPlugin {
 			case 'PROPPATCH' :
 				return $this->httpProppatch( $request, $response, $tempLocation );
 		}
-		return;
 	}
 
 	/**

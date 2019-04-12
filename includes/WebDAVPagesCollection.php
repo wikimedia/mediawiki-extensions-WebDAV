@@ -33,7 +33,7 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 
 		$conds = [
 			'page_namespace' => $this->iNSId,
-			'page_title '.$dbr->buildLike(
+			'page_title ' . $dbr->buildLike(
 				$this->sBasePath,
 				$dbr->anyString()
 			)
@@ -56,23 +56,23 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 				// It's not a file, it's not a folder... it's a 'fillder'
 				// This is a valid MediaWiki title but it can not be formed into a file/folder
 				// structure. Sorry for that :(
-				wfDebugLog( 'WebDAV', __METHOD__.': Invalid characters in '.$row->page_title );
+				wfDebugLog( 'WebDAV', __METHOD__ . ': Invalid characters in ' . $row->page_title );
 				continue;
 			}
 
 			$regex = $config->get( 'WebDAVInvalidFileNameCharsRegEx' );
 			if ( preg_match( $regex, $baseTitle ) !== 0 ) {
-				wfDebugLog( 'WebDAV', __METHOD__.': Invalid characters in '.$row->page_title );
+				wfDebugLog( 'WebDAV', __METHOD__ . ': Invalid characters in ' . $row->page_title );
 				continue;
 			}
 
 			// This is not the leaf part
 			if ( count( $trimmedTitleParts ) > 1 && MWNamespace::hasSubpages( $this->iNSId ) ) {
 				// Prevent duplicates
-				$key = 'COLLECTION_'.$baseTitle;
+				$key = 'COLLECTION_' . $baseTitle;
 				if ( !isset( $children[$key] ) ) {
 					$children[$key] = new WebDAVPagesCollection(
-						$this, $baseTitle, $this->iNSId, $this->sBasePath.$baseTitle.'/'
+						$this, $baseTitle, $this->iNSId, $this->sBasePath . $baseTitle . '/'
 					);
 				}
 			} else {
@@ -116,10 +116,10 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 			// remove '.wiki' extension
 			$name = implode( '.', $nameParts );
 		}
-		$title = Title::makeTitle( $this->iNSId, $this->sBasePath.$name );
+		$title = Title::makeTitle( $this->iNSId, $this->sBasePath . $name );
 		if ( $title instanceof Title === false ) {
-			$msg = 'Error creating page ' . $this->sBasePath.$name. ' in NS '. $this->iNSId;
-			wfDebugLog( 'WebDAV', __CLASS__ .': '.$msg );
+			$msg = 'Error creating page ' . $this->sBasePath . $name . ' in NS ' . $this->iNSId;
+			wfDebugLog( 'WebDAV', __CLASS__ . ': ' . $msg );
 			throw new Sabre\DAV\Exception\Forbidden( $msg );
 		}
 		$wikiPage = WikiPage::factory( $title );
@@ -135,8 +135,8 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 		);
 
 		if ( !$status->isOK() ) {
-			$msg = 'Error #2 creating page ' . $this->sBasePath.$name. ' in NS '. $this->iNSId;
-			wfDebugLog( 'WebDAV', __CLASS__ .': '.$msg );
+			$msg = 'Error #2 creating page ' . $this->sBasePath . $name . ' in NS ' . $this->iNSId;
+			wfDebugLog( 'WebDAV', __CLASS__ . ': ' . $msg );
 			throw new Sabre\DAV\Exception\Forbidden( $msg );
 		}
 	}

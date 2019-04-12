@@ -19,7 +19,7 @@ class WebDAVFilesCollection extends WebDAVPagesCollection {
 		$regex = $config->get( 'WebDAVInvalidFileNameCharsRegEx' );
 		foreach ( $res as $row ) {
 			if ( preg_match( $regex, $row->img_name ) !== 0 ) {
-				wfDebugLog( 'WebDAV', __METHOD__.': Invalid characters in '.$row->img_name );
+				wfDebugLog( 'WebDAV', __METHOD__ . ': Invalid characters in ' . $row->img_name );
 				continue;
 			}
 
@@ -47,7 +47,7 @@ class WebDAVFilesCollection extends WebDAVPagesCollection {
 		);
 		if ( $row === false ) {
 			$msg = 'File not found: ' . $normalName;
-			wfDebugLog( 'WebDAV', __CLASS__ .': '.$msg );
+			wfDebugLog( 'WebDAV', __CLASS__ . ': ' . $msg );
 			throw new Sabre\DAV\Exception\NotFound( $msg );
 		}
 

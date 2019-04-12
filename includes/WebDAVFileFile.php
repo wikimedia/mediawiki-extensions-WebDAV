@@ -130,14 +130,14 @@ class WebDAVFileFile extends Sabre\DAV\File {
 			wfDebugLog(
 				'WebDAV',
 				__CLASS__ . ': Error when trying to change name of "' . $this->getTitle()->getPrefixedText()
-					. '" to "' . $targetTitle->getPrefixedText() .'": '.  var_export( $result, true )
+					. '" to "' . $targetTitle->getPrefixedText() . '": ' . var_export( $result, true )
 			);
 			throw new Sabre\DAV\Exception\Forbidden( 'Permission denied to rename file' );
 		}
 		wfDebugLog(
 			'WebDAV',
 			__CLASS__ . ': Changed name of "' . $this->getTitle()->getPrefixedText()
-				. '" to "' . $targetTitle->getPrefixedText() .'"'
+				. '" to "' . $targetTitle->getPrefixedText() . '"'
 		);
 	}
 
@@ -154,7 +154,7 @@ class WebDAVFileFile extends Sabre\DAV\File {
 		}
 		wfDebugLog(
 			'WebDAV',
-			__CLASS__ . ': Deleted "' . $this->getTitle()->getPrefixedText().'"'
+			__CLASS__ . ': Deleted "' . $this->getTitle()->getPrefixedText() . '"'
 		);
 	}
 

@@ -52,7 +52,7 @@ class WebDAVPageFile extends Sabre\DAV\File {
 	 */
 	public function getName() {
 		// We always get the lowest possible part
-		return str_replace( ' ', '_', $this->getTitle()->getSubpageText() ).'.wiki';
+		return str_replace( ' ', '_', $this->getTitle()->getSubpageText() ) . '.wiki';
 		// $winfilename = iconv( 'cp1252','utf-8', $this->oTitle->getText() );
 		// return urlencode( $winfilename ).'.wiki';
 	}
@@ -96,9 +96,9 @@ class WebDAVPageFile extends Sabre\DAV\File {
 		);
 		$result = $this->getTitle()->moveTo( $targetTitle );
 		if ( !$result === true ) {
-			$msg = 'Error moving page ' . $this->getTitle()->getPrefixedText().
-				' to '. $targetTitle->getPrefixedText();
-			wfDebugLog( 'WebDAV', __CLASS__ .': '.$msg );
+			$msg = 'Error moving page ' . $this->getTitle()->getPrefixedText() .
+				' to ' . $targetTitle->getPrefixedText();
+			wfDebugLog( 'WebDAV', __CLASS__ . ': ' . $msg );
 			throw new Sabre\DAV\Exception\Forbidden( $msg );
 		}
 	}
@@ -113,7 +113,7 @@ class WebDAVPageFile extends Sabre\DAV\File {
 		);
 		if ( !$result === true ) {
 			$msg = 'Error deleting page ' . $this->getTitle()->getPrefixedText();
-			wfDebugLog( 'WebDAV', __CLASS__ .': '.$msg );
+			wfDebugLog( 'WebDAV', __CLASS__ . ': ' . $msg );
 			throw new Sabre\DAV\Exception\Forbidden( $msg );
 		}
 	}
@@ -134,7 +134,7 @@ class WebDAVPageFile extends Sabre\DAV\File {
 		);
 		if ( !$status->isOK() ) {
 			$msg = 'Error editing page ' . $this->getTitle()->getPrefixedText();
-			wfDebugLog( 'WebDAV', __CLASS__ .': '.$msg );
+			wfDebugLog( 'WebDAV', __CLASS__ . ': ' . $msg );
 			throw new Sabre\DAV\Exception\Forbidden( $msg );
 		}
 	}

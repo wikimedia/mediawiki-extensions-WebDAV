@@ -51,15 +51,15 @@ try {
 	);
 	wfDebugLog(
 		'WebDAV',
-		'webdav.php: Starting server for user '.RequestContext::getMain()->getUser()->getName()
+		'webdav.php: Starting server for user ' . RequestContext::getMain()->getUser()->getName()
 	);
 	wfDebugLog(
 		'WebDAV',
-		'webdav.php: URL: '.RequestContext::getMain()->getRequest()->getRequestURL()
+		'webdav.php: URL: ' . RequestContext::getMain()->getRequest()->getRequestURL()
 	);
 	wfDebugLog(
 		'WebDAV',
-		'webdav.php: User agent: '.$_SERVER['HTTP_USER_AGENT']
+		'webdav.php: User agent: ' . $_SERVER['HTTP_USER_AGENT']
 	);
 
 	$server->exec();
@@ -67,7 +67,7 @@ try {
 catch ( Exception $e ) {
 	wfDebugLog(
 		'WebDAV',
-		'webdav.php: Exception: '.$e->getMessage()
+		'webdav.php: Exception: ' . $e->getMessage()
 	);
 	if ( $e instanceof MWException ) {
 		wfDebugLog( 'WebDAV', $e->getText() );
