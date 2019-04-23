@@ -76,6 +76,6 @@ catch ( Exception $e ) {
 	# throw $e;
 }
 
-$factory = wfGetLBFactory();
+$factory = \MediaWiki\MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 $factory->commitMasterChanges();
 $factory->shutdown();
