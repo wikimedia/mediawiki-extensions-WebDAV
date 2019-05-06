@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hamilton Abreu"
+		]
+	},
+	"webdav-desc": "Adiciona um ponto de terminação WebDAV que expõe o conteúdo da wiki",
+	"webdavmanager": "Gestor WebDAV",
+	"webdav-ns-main": "(Páginas)",
+	"webdav-default-edit-comment": "Editada através do WebDAV",
+	"webdav-default-delete-comment": "Eliminada através do WebDAV",
+	"webdav-default-move-comment": "Movida através do WebDAV",
+	"prefs-webdav": "WebDAV",
+	"webdav-statictoken-prefs": "URL estático do WebDAV",
+	"webdav-statictoken-prefs-help": "Usar este URL para montar a unidade de rede do WebDAV"
+}
