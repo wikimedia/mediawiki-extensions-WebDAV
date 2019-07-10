@@ -26,6 +26,9 @@
 namespace MediaWiki\Extension\WebDAV;
 
 class Extension {
+	const WEBDAV_AUTH_NONE = 'none';
+	const WEBDAV_AUTH_TOKEN = 'token';
+	const WEBDAV_AUTH_MW = 'mw';
 
 	public static function onRegistration() {
 		global $wgWebDAVBaseUri, $wgScriptPath, $wgWebDAVUrlBaseUri,

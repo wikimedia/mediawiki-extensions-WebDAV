@@ -235,7 +235,7 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	 */
 	public static function makeTmpFileName( $name ) {
 		$config = \MediaWiki\MediaWikiServices::getInstance()
-			->getConfigFactory()->makeConfig( 'wg' );
+			->getConfigFactory()->makeConfig( 'webdav' );
 
 		$name = preg_replace(
 			$config->get( 'WebDAVInvalidFileNameCharsRegEx' ),

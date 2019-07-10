@@ -56,12 +56,15 @@
 		"WebDAVLocksUnlock": "WebDAVHooks::onWebDAVLocksUnlock",
 		"GetPreferences": "WebDAVHooks::onGetPreferences"
 	},
+	"ConfigRegistry": {
+		"webdav": "GlobalVarConfig::newInstance"
+	},
 	"config": {
 		"WebDAVRootNode": {
 			"value": "WebDAVNamespacesCollection"
 		},
 		"WebDAVAuthType": {
-			"value": 0
+			"value": "none"
 		},
 		"WebDAVBaseUri": {
 			"value": ""

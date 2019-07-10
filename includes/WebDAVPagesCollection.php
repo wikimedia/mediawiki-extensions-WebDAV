@@ -27,7 +27,7 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 	 */
 	public function getChildren() {
 		$config = \MediaWiki\MediaWikiServices::getInstance()
-			->getConfigFactory()->makeConfig( 'wg' );
+			->getConfigFactory()->makeConfig( 'webdav' );
 
 		$dbr = wfGetDB( DB_REPLICA );
 

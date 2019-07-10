@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\Extension\WebDAV\Extension as WebDAV;
+
 class WebDAVHooks {
 	/**
 	 * Adds the lock table to the database
@@ -33,17 +35,18 @@ class WebDAVHooks {
 	 * @return true
 	 */
 	public static function onWebDAVPlugins( $server, &$plugins ) {
-		$config = \MediaWiki\MediaWikiServices::getInstance()->getMainConfig();
+		$config = \MediaWiki\MediaWikiServices::getInstance()
+				->getConfigFactory()->makeConfig( 'webdav' );
 		$requestContext = RequestContext::getMain();
 		$webDAVTokenizer = \MediaWiki\MediaWikiServices::getInstance()->getService( 'WebDAVTokenizer' );
 
 		switch ( $config->get( 'WebDAVAuthType' ) ) {
-			case WEBDAV_AUTH_MW:
+			case WebDAV::WEBDAV_AUTH_MW:
 				$plugins['auth'] = new \Sabre\DAV\Auth\Plugin(
 						new WebDAVMediaWikiAuthBackend( $requestContext )
 					);
 				break;
-			case WEBDAV_AUTH_TOKEN:
+			case WebDAV::WEBDAV_AUTH_TOKEN:
 				$plugins['auth'] = new \Sabre\DAV\Auth\Plugin(
 						new WebDAVTokenAuthBackend( $requestContext, $webDAVTokenizer )
 					);
@@ -61,8 +64,9 @@ class WebDAVHooks {
 	 * @return true
 	 */
 	public static function onWebDAVLocksUnlock( $success, $lockInfo ) {
-		$config = \MediaWiki\MediaWikiServices::getInstance()->getMainConfig();
-		if ( $config->get( 'WebDAVAuthType' ) !== WEBDAV_AUTH_TOKEN ) {
+		$config = \MediaWiki\MediaWikiServices::getInstance()
+				->getConfigFactory()->makeConfig( 'webdav' );
+		if ( $config->get( 'WebDAVAuthType' ) !== WebDAV::WEBDAV_AUTH_TOKEN ) {
 			return true;
 		}
 
@@ -86,8 +90,10 @@ class WebDAVHooks {
 	 * @return bool
 	 */
 	public static function onGetPreferences( User $user, array &$preferences ) {
-		$config = \MediaWiki\MediaWikiServices::getInstance()->getMainConfig();
-		if ( $config->get( 'WebDAVAuthType' ) !== WEBDAV_AUTH_TOKEN ) {
+		$config = \MediaWiki\MediaWikiServices::getInstance()
+				->getConfigFactory()->makeConfig( 'webdav' );
+
+		if ( $config->get( 'WebDAVAuthType' ) !== WebDAV::WEBDAV_AUTH_TOKEN ) {
 			return true;
 		}
 

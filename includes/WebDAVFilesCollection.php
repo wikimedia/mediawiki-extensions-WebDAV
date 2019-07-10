@@ -9,7 +9,7 @@ class WebDAVFilesCollection extends WebDAVPagesCollection {
 	public function getChildren() {
 		// HINT: http://sabre.io/dav/character-encoding/
 		$config = \MediaWiki\MediaWikiServices::getInstance()
-			->getConfigFactory()->makeConfig( 'wg' );
+			->getConfigFactory()->makeConfig( 'webdav' );
 
 		$dbr = wfGetDB( DB_REPLICA );
 		$res = $dbr->select( 'image', '*' );

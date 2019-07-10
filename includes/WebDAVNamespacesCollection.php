@@ -44,7 +44,7 @@ class WebDAVNamespacesCollection extends Sabre\DAV\Collection {
 	 */
 	public function makeChild( $nsId, $name ) {
 		$config = \MediaWiki\MediaWikiServices::getInstance()
-			->getConfigFactory()->makeConfig( 'wg' );
+			->getConfigFactory()->makeConfig( 'webdav' );
 
 		$collectionClass = 'WebDAVPagesCollection';
 		$collections = $config->get( 'WebDAVNamespaceCollections' );
@@ -60,7 +60,7 @@ class WebDAVNamespacesCollection extends Sabre\DAV\Collection {
 	 */
 	public static function getNamespaces() {
 		$config = \MediaWiki\MediaWikiServices::getInstance()
-			->getConfigFactory()->makeConfig( 'wg' );
+			->getConfigFactory()->makeConfig( 'webdav' );
 
 		$namespaceIds = [];
 		$language = \RequestContext::getMain()->getLanguage();

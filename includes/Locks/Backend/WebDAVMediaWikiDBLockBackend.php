@@ -77,7 +77,7 @@ class WebDAVMediaWikiDBLockBackend extends \Sabre\DAV\Locks\Backend\AbstractBack
 	 */
 	public function lock( $uri, \Sabre\DAV\Locks\LockInfo $lockInfo ) {
 		$config = \MediaWiki\MediaWikiServices::getInstance()
-			->getConfigFactory()->makeConfig( 'wg' );
+			->getConfigFactory()->makeConfig( 'webdav' );
 
 		$lockInfo->owner = RequestContext::getMain()->getUser()->getId();
 		$lockInfo->timeout = $config->get( 'WebDAVLockTimeOut' );

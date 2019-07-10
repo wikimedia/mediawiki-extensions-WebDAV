@@ -48,11 +48,11 @@ You may need to configure the HTTP Verbs in the PHP FastCGI configuration!
 ==Using MediaWiki Authentication / aka Non-SSO-Setup==
 Just add the following to you LocalSettings.php
 
-$wgWebDAVAuthType = WEBDAV_AUTH_MW;
+$wgWebDAVAuthType = 'mw';
 
 or for token auth:
 
-$wgWebDAVAuthType = WEBDAV_AUTH_TOKEN;
+$wgWebDAVAuthType = 'token';
 
 ==Notes==
 * Multi-upload works

@@ -25,7 +25,7 @@ use Sabre\DAV;
 #  See http://sabre.io/dav/clients/msoffice/
 try {
 	$config = \MediaWiki\MediaWikiServices::getInstance()
-			->getConfigFactory()->makeConfig( 'wg' );
+			->getConfigFactory()->makeConfig( 'webdav' );
 	$rootNode = $config->get( 'WebDAVRootNode' );
 	$server = new DAV\Server( new $rootNode() );
 	$server->setBaseUri( $config->get( 'WebDAVBaseUri' ) );

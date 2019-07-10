@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\Extension\WebDAV\Extension as WebDAV;
+
 class WebDAVUrlProvider {
 
 	/**
@@ -58,7 +60,7 @@ class WebDAVUrlProvider {
 		$filename = $title->getText();
 		$filename = str_replace( ' ', '_', $filename );
 
-		if ( $this->iWebDAVAuthType === WEBDAV_AUTH_TOKEN ) {
+		if ( $this->iWebDAVAuthType === WebDAV::WEBDAV_AUTH_TOKEN ) {
 			$sToken = $this->getToken( $title->getText() );
 			$path = $sToken . $path;
 		}
