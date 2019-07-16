@@ -18,6 +18,7 @@ class WebDAVMediaWikiAuthBackend extends Sabre\DAV\Auth\Backend\AbstractBasic {
 	public function __construct( $requestContext ) {
 		$this->requestContext = $requestContext;
 	}
+
 	/**
 	 *
 	 * @param string $username
