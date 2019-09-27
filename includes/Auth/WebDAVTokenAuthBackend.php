@@ -63,6 +63,7 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 		global $wgUser;
 
 		$token = $this->getAndRemoveToken( $request );
+
 		if ( empty( $token ) ) {
 			$staticToken = $this->getAndRemoveToken( $request, 'stk' );
 			if ( $this->oRequestContext->getUser()->isLoggedIn() ) {
@@ -178,18 +179,9 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 			if ( $this->checkStaticToken( $staticToken, $user ) === false ) {
 				return false;
 			}
-			if ( $user->checkPassword( $password ) ) {
+			if ( WebDAVMediaWikiAuthBackend::doValidateUserAndPassword( $user->getName(), $password ) ) {
 				$this->doLogInUser( $user );
 				$result = true;
-			} else {
-				// Give a chance to other auth mechanisms to authenticate user
-				\Hooks::run(
-					'WebDAVValidateUserPass',
-					[ $user, $username, $password, &$result ]
-				);
-				if ( $result === true ) {
-					$this->doLogInUser( $user );
-				}
 			}
 		}
 

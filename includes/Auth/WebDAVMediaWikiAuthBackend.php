@@ -2,6 +2,9 @@
 // HINT in SabreDAV 2.x there will be Sabre\DAV\Auth\Backend\BasicCallback
 // available as an alternative to this implemenation
 
+use MediaWiki\Auth\AuthManager;
+use MediaWiki\Auth\AuthenticationRequest;
+use MediaWiki\Auth\AuthenticationResponse;
 
 class WebDAVMediaWikiAuthBackend extends Sabre\DAV\Auth\Backend\AbstractBasic {
 
@@ -29,14 +32,31 @@ class WebDAVMediaWikiAuthBackend extends Sabre\DAV\Auth\Backend\AbstractBasic {
 		$username = utf8_encode( $username );
 		$password = utf8_encode( $password );
 
-		$user = User::newFromName( $username );
-		if ( $user instanceof User ) {
-			if ( $user->checkPassword( $password ) ) {
-				$user->setCookies();
-				// The new way
-				$this->requestContext->setUser( $user );
-				return true;
-			}
+		if ( static::doValidateUserAndPassword( $username, $password ) ) {
+			$user = User::newFromName( $username );
+			RequestContext::getMain()->setUser( $user );
+			global $wgUser;
+			$wgUser = $user;
+		}
+	}
+
+	/**
+	 * @param string $username
+	 * @param string $password
+	 * @return bool
+	 */
+	public static function doValidateUserAndPassword( $username, $password ) {
+		$manager = AuthManager::singleton();
+		$reqs = AuthenticationRequest::loadRequestsFromSubmission(
+			$manager->getAuthenticationRequests( AuthManager::ACTION_LOGIN ),
+			[
+				'username' => $username,
+				'password' => $password,
+			]
+		);
+		$res = AuthManager::singleton()->beginAuthentication( $reqs, 'null:' );
+		if ( $res->status === AuthenticationResponse::PASS ) {
+			return true;
 		}
 		return false;
 	}

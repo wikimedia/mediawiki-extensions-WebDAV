@@ -111,7 +111,7 @@ class WebDAVFileFile extends Sabre\DAV\File {
 		fwrite( $fp, $data );
 		fclose( $fp );
 
-		if ( !\Hooks::run( 'WebDAVFileFilePutBeforePublish', [ $tmpPath, $this->oFile ] ) ) {
+		if ( !Hooks::run( 'WebDAVFileFilePutBeforePublish', [ $tmpPath, $this->oFile ] ) ) {
 			return;
 		}
 
@@ -167,6 +167,10 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	 */
 	public static function publishToWiki( $sourceFilePath, $targetFileName ) {
 		global $wgLocalFileRepo;
+
+		if ( !Hooks::run( 'WebDAVPublishToWiki', [ $sourceFilePath, $targetFileName ] ) ) {
+			return;
+		}
 		# Validate a title
 		// This title object is no longer necessary, other than to verify
 		// that file target name is valid
@@ -222,8 +226,7 @@ class WebDAVFileFile extends Sabre\DAV\File {
 			$page = WikiPage::factory( $repoFileTitle );
 			$page->doEditContent( new WikitextContent( '' ), '' );
 
-			$searchUpdate = new SearchUpdate( $repoFileTitle->getArticleID(), $repoFileTitle, '' );
-			$searchUpdate->doUpdate();
+			Hooks::run( 'WebDAVPublishToWikiDone', [ $repoFile, $sourceFilePath ] );
 		}
 	}
 
