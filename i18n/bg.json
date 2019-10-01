@@ -1,16 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Vlad5250"
+			"Vlad5250",
+			"StanProg"
 		]
 	},
-	"webdav-desc": "Добавя крайна точка WebDAV, която излага съдържанието на уикито",
-	"webdavmanager": "Управител на WebDAV",
+	"webdav-desc": "Добавя крайна точка за WebDAV, която разкрива съдържанието на уикито",
+	"webdavmanager": "Мениджър на WebDAV",
 	"webdav-ns-main": "(Страници)",
 	"webdav-default-edit-comment": "Редактирано през WebDAV",
 	"webdav-default-delete-comment": "Изтрито през WebDAV",
 	"webdav-default-move-comment": "Преместено през WebDAV",
 	"prefs-webdav": "WebDAV",
-	"webdav-statictoken-prefs": "Непроменлив URL на WebDAV",
-	"webdav-statictoken-prefs-help": "Приложете този URL, за да настроите мрежовото устройство на WebDAV"
+	"webdav-statictoken-prefs": "Статичен URL на WebDAV",
+	"webdav-statictoken-prefs-help": "Използвайте този URL, за да настроите мрежовото устройство на WebDAV"
 }
