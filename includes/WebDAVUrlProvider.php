@@ -6,7 +6,7 @@ class WebDAVUrlProvider {
 
 	/**
 	 *
-	 * @var \WebRequest
+	 * @var WebRequest
 	 */
 	protected $oRequest;
 
@@ -26,11 +26,11 @@ class WebDAVUrlProvider {
 	 *
 	 * @var int
 	 */
-	protected $iWebDAVAuthType;
+	protected $webDAVAuthType;
 
 	/**
 	 *
-	 * @var \User
+	 * @var User
 	 */
 	protected $oUser;
 
@@ -38,14 +38,14 @@ class WebDAVUrlProvider {
 	 *
 	 * @param string $server
 	 * @param string $webDAVUrlBaseUri
-	 * @param int $webDAVAuthType
-	 * @param \WebRequest $request
-	 * @param \User $user
+	 * @param string $webDAVAuthType
+	 * @param WebRequest $request
+	 * @param User $user
 	 */
 	public function __construct( $server, $webDAVUrlBaseUri, $webDAVAuthType, $request, $user ) {
 		$this->sServer = $server;
 		$this->sWebDAVUrlBaseUri = $webDAVUrlBaseUri;
-		$this->iWebDAVAuthType = $webDAVAuthType;
+		$this->webDAVAuthType = $webDAVAuthType;
 		$this->oRequest = $request;
 		$this->oUser = $user;
 	}
@@ -60,7 +60,7 @@ class WebDAVUrlProvider {
 		$filename = $title->getText();
 		$filename = str_replace( ' ', '_', $filename );
 
-		if ( $this->iWebDAVAuthType === WebDAV::WEBDAV_AUTH_TOKEN ) {
+		if ( $this->webDAVAuthType === WebDAV::WEBDAV_AUTH_TOKEN ) {
 			$sToken = $this->getToken( $title->getText() );
 			$path = $sToken . $path;
 		}

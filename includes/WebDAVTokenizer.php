@@ -85,6 +85,9 @@ class WebDAVTokenizer {
 	 */
 	public function getUserFromTokenAndUrl( $token, $url ) {
 		$this->sFilename = WebDAVHelper::getFilenameFromUrl( $url );
+		if ( !$this->sFilename ) {
+			return null;
+		}
 		$conds = [
 			'wdt_token' => $token,
 			'wdt_valid' => 1,

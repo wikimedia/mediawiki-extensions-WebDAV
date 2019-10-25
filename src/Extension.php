@@ -38,5 +38,7 @@ class Extension {
 		// Used for constructing links, can differ from $wgWebDAVBaseUri on some setups
 		$wgWebDAVUrlBaseUri = $wgWebDAVBaseUri;
 		$wgWebDAVNamespaceCollections[NS_MEDIA] = 'WebDAVFilesCollection';
+
+		$GLOBALS['wgWebDAVServer'] = $GLOBALS['wgServer'];
 	}
 }
