@@ -39,6 +39,8 @@ class Extension {
 		$wgWebDAVUrlBaseUri = $wgWebDAVBaseUri;
 		$wgWebDAVNamespaceCollections[NS_MEDIA] = 'WebDAVFilesCollection';
 
-		$GLOBALS['wgWebDAVServer'] = $GLOBALS['wgServer'];
+		if ( $GLOBALS['wgWebDAVServer'] === '' ) {
+			$GLOBALS['wgWebDAVServer'] = $GLOBALS['wgServer'];
+		}
 	}
 }
