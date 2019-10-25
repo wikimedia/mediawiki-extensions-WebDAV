@@ -105,7 +105,7 @@ class WebDAVHooks {
 		$webDAVTokenizer->setUser( $user );
 		$token = $webDAVTokenizer->getStaticToken();
 		$webDAVUrl =
-			$config->get( 'Server' )
+			$config->get( 'WebDAVServer' )
 			. $config->get( 'WebDAVBaseUri' )
 			. 'stk'
 			. $token
