@@ -7,7 +7,7 @@ return [
 		$user = RequestContext::getMain()->getUser();
 
 		return new WebDAVUrlProvider(
-				$config->get( 'Server' ),
+				$config->get( 'WebDAVServer' ),
 				$config->get( 'WebDAVUrlBaseUri' ),
 				$config->get( 'WebDAVAuthType' ),
 				\RequestContext::getMain(),

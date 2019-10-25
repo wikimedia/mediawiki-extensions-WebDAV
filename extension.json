@@ -66,6 +66,9 @@
 		"WebDAVAuthType": {
 			"value": "none"
 		},
+		"WebDAVServer": {
+			"value": ""
+		},
 		"WebDAVBaseUri": {
 			"value": ""
 		},
