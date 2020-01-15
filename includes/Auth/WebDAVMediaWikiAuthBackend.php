@@ -2,9 +2,9 @@
 // HINT in SabreDAV 2.x there will be Sabre\DAV\Auth\Backend\BasicCallback
 // available as an alternative to this implemenation
 
-use MediaWiki\Auth\AuthManager;
 use MediaWiki\Auth\AuthenticationRequest;
 use MediaWiki\Auth\AuthenticationResponse;
+use MediaWiki\Auth\AuthManager;
 
 class WebDAVMediaWikiAuthBackend extends Sabre\DAV\Auth\Backend\AbstractBasic {
 
