@@ -4,7 +4,7 @@
 	"license": "GPL-3.0-only",
 	"require": {
 		"composer/installers": "~1.0",
-		"sabre/dav": "~3"
+		"sabre/dav": "^4.0"
 	},
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": "1.0.0",
