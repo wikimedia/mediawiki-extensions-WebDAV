@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 class WebDAVFileFile extends Sabre\DAV\File {
 	/**
 	 *
@@ -220,7 +222,12 @@ class WebDAVFileFile extends Sabre\DAV\File {
 			throw new Sabre\DAV\Exception\Forbidden( $msg );
 		}
 
-		$repoFile = wfFindFile( $targetFileName );
+		if ( method_exists( MediaWikiServices::class, 'getRepoGroup' ) ) {
+			// MediaWiki 1.34+
+			$repoFile = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $title );
+		} else {
+			$repoFile = wfFindFile( $targetFileName );
+		}
 		if ( $repoFile !== false ) {
 			$repoFileTitle = $repoFile->getTitle();
 			$page = WikiPage::factory( $repoFileTitle );
