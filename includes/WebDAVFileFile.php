@@ -144,9 +144,16 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	}
 
 	public function delete() {
-		$result = $this->oFile->delete(
-			wfMessage( 'webdav-default-delete-comment' )->plain()
-		);
+		$reason = wfMessage( 'webdav-default-delete-comment' )->plain();
+		$oFile = $this->oFile;
+
+		if ( method_exists( $oFile, 'deleteFile' ) ) {
+			// MW 1.35+
+			$result = $oFile->deleteFile( $reason, RequestContext::getMain()->getUser() );
+		} else {
+			$result = $oFile->delete( $reason );
+		}
+
 		if ( !$result === true ) {
 			wfDebugLog(
 				'WebDAV',
