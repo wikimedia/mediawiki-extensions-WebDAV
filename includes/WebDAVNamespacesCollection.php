@@ -59,11 +59,13 @@ class WebDAVNamespacesCollection extends Sabre\DAV\Collection {
 	 * @return int[]
 	 */
 	public static function getNamespaces() {
-		$config = \MediaWiki\MediaWikiServices::getInstance()
-			->getConfigFactory()->makeConfig( 'webdav' );
+		$mwServices = \MediaWiki\MediaWikiServices::getInstance();
+		$config = $services->getConfigFactory()->makeConfig( 'webdav' );
 
 		$namespaceIds = [];
-		$language = \RequestContext::getMain()->getLanguage();
+		$context = \RequestContext::getMain();
+		$language = $context->getLanguage();
+		$user = $context->getUser();
 		foreach ( $language->getNamespaceIds() as $nsId ) {
 			/* For some strange reasons there are duplicates in the list
 			 * provided by Language object.
@@ -81,8 +83,17 @@ class WebDAVNamespacesCollection extends Sabre\DAV\Collection {
 			}
 
 			$dummyTitle = Title::makeTitle( $nsId, 'X' );
-			if ( $dummyTitle->userCan( 'read' ) === false ) {
-				continue;
+			if ( class_exists( 'MediaWiki\Permissions\PermissionManager' ) ) {
+				// MW 1.33+
+				if ( !$mwServices->getPermissionManager()
+					->userCan( 'read', $user, $dummyTitle )
+				) {
+					continue;
+				}
+			} else {
+				if ( $dummyTitle->userCan( 'read' ) === false ) {
+					continue;
+				}
 			}
 
 			$name = MWNamespace::getCanonicalName( $nsId );

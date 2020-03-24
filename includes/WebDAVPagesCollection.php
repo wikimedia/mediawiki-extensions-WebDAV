@@ -26,8 +26,9 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 	 * @return Sabre\DAV\Node[]
 	 */
 	public function getChildren() {
-		$config = \MediaWiki\MediaWikiServices::getInstance()
-			->getConfigFactory()->makeConfig( 'webdav' );
+		$mwServices = \MediaWiki\MediaWikiServices::getInstance();
+		$config = $mwServices->getConfigFactory()->makeConfig( 'webdav' );
+		$user = RequestContext::getMain()->getUser();
 
 		$dbr = wfGetDB( DB_REPLICA );
 
@@ -77,7 +78,14 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 				}
 			} else {
 				$title = Title::newFromRow( $row );
-				if ( $title->userCan( 'read' ) ) {
+				if ( class_exists( 'MediaWiki\Permissions\PermissionManager' ) ) {
+					// MW 1.33+
+					$canRead = $mwServices->getPermissionManager()
+						->userCan( 'read', $user, $title );
+				} else {
+					$canRead = $title->userCan( 'read' );
+				}
+				if ( $canRead ) {
 					$children[] = new WebDAVPageFile( $this, $title );
 				}
 			}
