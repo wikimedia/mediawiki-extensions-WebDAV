@@ -108,10 +108,16 @@ class WebDAVPageFile extends Sabre\DAV\File {
 	 * @throws Sabre\DAV\Exception\Forbidden
 	 */
 	public function delete() {
-		$result = $this->getWikiPage()->doDeleteArticleReal(
-			wfMessage( 'webdav-default-delete-comment' )->plain()
-		);
-		if ( !$result === true ) {
+		$reason = wfMessage( 'webdav-default-delete-comment' )->plain();
+		if ( version_compare( MW_VERSION, '1.35', '<' ) ) {
+			$result = $this->getWikiPage()->doDeleteArticleReal( $reason );
+		} else {
+			$result = $this->getWikiPage()->doDeleteArticleReal(
+				$reason,
+				RequestContext::getMain()->getUser()
+			);
+		}
+		if ( !$result->isOk() ) {
 			$msg = 'Error deleting page ' . $this->getTitle()->getPrefixedText();
 			wfDebugLog( 'WebDAV', __CLASS__ . ': ' . $msg );
 			throw new Sabre\DAV\Exception\Forbidden( $msg );
