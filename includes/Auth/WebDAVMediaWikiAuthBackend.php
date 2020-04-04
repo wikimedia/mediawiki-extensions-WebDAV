@@ -5,6 +5,7 @@
 use MediaWiki\Auth\AuthenticationRequest;
 use MediaWiki\Auth\AuthenticationResponse;
 use MediaWiki\Auth\AuthManager;
+use MediaWiki\MediaWikiServices;
 
 class WebDAVMediaWikiAuthBackend extends Sabre\DAV\Auth\Backend\AbstractBasic {
 
@@ -46,7 +47,12 @@ class WebDAVMediaWikiAuthBackend extends Sabre\DAV\Auth\Backend\AbstractBasic {
 	 * @return bool
 	 */
 	public static function doValidateUserAndPassword( $username, $password ) {
-		$manager = AuthManager::singleton();
+		if ( method_exists( MediaWikiServices::class, 'getAuthManager' ) ) {
+			// MediaWiki 1.35+
+			$manager = MediaWikiServices::getInstance()->getAuthManager();
+		} else {
+			$manager = AuthManager::singleton();
+		}
 		$reqs = AuthenticationRequest::loadRequestsFromSubmission(
 			$manager->getAuthenticationRequests( AuthManager::ACTION_LOGIN ),
 			[
@@ -54,7 +60,7 @@ class WebDAVMediaWikiAuthBackend extends Sabre\DAV\Auth\Backend\AbstractBasic {
 				'password' => $password,
 			]
 		);
-		$res = AuthManager::singleton()->beginAuthentication( $reqs, 'null:' );
+		$res = $manager->beginAuthentication( $reqs, 'null:' );
 		if ( $res->status === AuthenticationResponse::PASS ) {
 			return true;
 		}
