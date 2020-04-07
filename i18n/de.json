@@ -1,5 +1,7 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"webdav-desc": "Stellt die Inhalte des Wikis über einen WebDAV-Endpunkt zur Verfügung",
 	"webdavmanager": "WebDAV Verwaltung",
 	"webdav-ns-main": "(Seiten)",
