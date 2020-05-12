@@ -85,15 +85,15 @@
 			"value": {}
 		},
 		"WebDAVInvalidFileNameCharsRegEx": {
-			"@HINT": "HINT: http://sabre.io/dav/character-encoding/",
+			"description": "See http://sabre.io/dav/character-encoding/",
 			"value": "#[:|/|\\\\\\|\\*|\\?|\"|\\||\\#|<|>]#si"
 		},
 		"WebDAVLockTimeOut": {
-			"@HINT": "30 Minutes",
+			"description": "Defaults to 30 minutes",
 			"value": 1800
 		},
 		"WebDAVTokenExpiration": {
-			"@HINT": "24 Hours",
+			"description": "Defaults to 24 hours",
 			"value": 86400
 		},
 		"WebDAVStaticTokenExpiration": {
