@@ -31,10 +31,10 @@ class Extension {
 	const WEBDAV_AUTH_MW = 'mw';
 
 	public static function onRegistration() {
-		global $wgWebDAVBaseUri, $wgScriptPath, $wgWebDAVUrlBaseUri,
+		global $wgWebDAVBaseUri, $wgScriptPath,
 			$wgWebDAVUrlBaseUri, $wgWebDAVNamespaceCollections;
 
-		$wgWebDAVBaseUri = $wgScriptPath . '/webdav.php/';
+		$wgWebDAVBaseUri = $wgScriptPath . '/webdav/';
 		// Used for constructing links, can differ from $wgWebDAVBaseUri on some setups
 		$wgWebDAVUrlBaseUri = $wgWebDAVBaseUri;
 		$wgWebDAVNamespaceCollections[NS_MEDIA] = 'WebDAVFilesCollection';
