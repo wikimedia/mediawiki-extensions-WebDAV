@@ -57,11 +57,10 @@ class WebDAVUrlProvider {
 	 */
 	public function getURL( Title $title ) {
 		$path = MWNamespace::getCanonicalName( NS_MEDIA );
-		$filename = $title->getText();
-		$filename = str_replace( ' ', '_', $filename );
+		$filename = $title->getDBKey();
 
 		if ( $this->webDAVAuthType === WebDAV::WEBDAV_AUTH_TOKEN ) {
-			$sToken = $this->getToken( $title->getText() );
+			$sToken = $this->getToken( $filename );
 			$path = $sToken . $path;
 		}
 		\Hooks::run( 'WebDAVUrlProviderGetUrl', [ &$path, &$filename, $title ] );
