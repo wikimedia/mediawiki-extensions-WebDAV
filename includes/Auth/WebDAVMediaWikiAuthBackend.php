@@ -38,7 +38,9 @@ class WebDAVMediaWikiAuthBackend extends Sabre\DAV\Auth\Backend\AbstractBasic {
 			RequestContext::getMain()->setUser( $user );
 			global $wgUser;
 			$wgUser = $user;
+			return true;
 		}
+		return false;
 	}
 
 	/**
