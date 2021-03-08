@@ -31,13 +31,18 @@ class Extension {
 	const WEBDAV_AUTH_MW = 'mw';
 
 	public static function onRegistration() {
-		global $wgWebDAVBaseUri, $wgScriptPath,
-			$wgWebDAVUrlBaseUri, $wgWebDAVNamespaceCollections;
-
-		$wgWebDAVBaseUri = $wgScriptPath . '/webdav/';
-		// Used for constructing links, can differ from $wgWebDAVBaseUri on some setups
-		$wgWebDAVUrlBaseUri = $wgWebDAVBaseUri;
-		$wgWebDAVNamespaceCollections[NS_MEDIA] = 'WebDAVFilesCollection';
+		if ( empty( $GLOBALS['wgWebDAVBaseUri'] ) ) {
+			// Base URI should be $wgWebDAVServer/webdav
+			$GLOBALS['wgWebDAVBaseUri'] = '/webdav/';
+		}
+		if ( empty( $GLOBALS['wgWebDAVUrlBaseUri'] ) ) {
+			// Used for constructing links, can differ from $wgWebDAVBaseUri on some setups
+			$GLOBALS['wgWebDAVUrlBaseUri'] = $GLOBALS['wgWebDAVBaseUri'];
+		}
+		if ( empty( $GLOBALS['wgWebDAVNamespaceCollections'] ) ) {
+			// Used for constructing links, can differ from $wgWebDAVBaseUri on some setups
+			$GLOBALS['wgWebDAVNamespaceCollections'][NS_MEDIA] = 'WebDAVFilesCollection';
+		}
 
 		if ( $GLOBALS['wgWebDAVServer'] === '' ) {
 			$GLOBALS['wgWebDAVServer'] = $GLOBALS['wgServer'];
