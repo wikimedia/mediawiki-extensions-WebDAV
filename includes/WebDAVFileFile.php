@@ -223,7 +223,7 @@ class WebDAVFileFile extends Sabre\DAV\File {
 		$uploadStatus = $uploadFromStash->performUpload( $commentText, '', false, $user );
 		$uploadFromStash->cleanupTempFile();
 
-		if ( !$uploadStatus->isGood() ) {
+		if ( !$uploadStatus->isGood() && !static::isNoChangeError( $uploadStatus ) ) {
 			$msg = "Could not upload {$targetFileName}. (" . $uploadStatus->getWikiText() . ")";
 			wfDebugLog( 'WebDAV', __CLASS__ . ": $msg" );
 			throw new Sabre\DAV\Exception\Forbidden( $msg );
@@ -242,6 +242,25 @@ class WebDAVFileFile extends Sabre\DAV\File {
 
 			Hooks::run( 'WebDAVPublishToWikiDone', [ $repoFile, $sourceFilePath ] );
 		}
+	}
+
+	/**
+	 * @param Status $uploadStatus
+	 * @return bool
+	 */
+	protected static function isNoChangeError( $uploadStatus ) {
+		$errors = $uploadStatus->getErrors();
+		$hasNoChangeError = false;
+		$hasNoOtherErrors = true;
+		foreach ( $errors as $error ) {
+			if ( $error['message'] === 'fileexists-no-change' ) {
+				$hasNoChangeError = true;
+			} else {
+				$hasNoOtherErrors = false;
+			}
+		}
+
+		return $hasNoChangeError && $hasNoOtherErrors;
 	}
 
 	/**
