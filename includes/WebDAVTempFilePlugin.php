@@ -1,7 +1,9 @@
 <?php
 
+use Sabre\DAV\Exception\BadRequest;
 use Sabre\HTTP\RequestInterface;
 use Sabre\HTTP\ResponseInterface;
+use Sabre\Xml\ParseException;
 
 class WebDAVTempFilePlugin extends \Sabre\DAV\TemporaryFileFilterPlugin {
 	/**

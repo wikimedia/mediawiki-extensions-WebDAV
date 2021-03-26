@@ -111,7 +111,7 @@ class WebDAVTokenizer {
 	 * @return void
 	 */
 	protected function generateToken() {
-		if ( !$this->oUser instanceof User || $this->oUser->isLoggedIn() === false ) {
+		if ( !$this->oUser instanceof User || $this->oUser->isRegistered() === false ) {
 			return;
 		}
 		// Invalidate existing tokens to make sure we have no multiple valid tokens

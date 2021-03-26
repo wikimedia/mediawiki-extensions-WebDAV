@@ -1,6 +1,7 @@
 <?php
 
 use MediaWiki\Extension\WebDAV\Extension as WebDAV;
+use MediaWiki\MediaWikiServices;
 
 class WebDAVUrlProvider {
 
@@ -35,6 +36,11 @@ class WebDAVUrlProvider {
 	protected $oUser;
 
 	/**
+	 * @var MediaWikiServices
+	 */
+	protected $services = null;
+
+	/**
 	 *
 	 * @param string $server
 	 * @param string $webDAVUrlBaseUri
@@ -48,6 +54,8 @@ class WebDAVUrlProvider {
 		$this->webDAVAuthType = $webDAVAuthType;
 		$this->oRequest = $request;
 		$this->oUser = $user;
+
+		$this->services = MediaWikiServices::getInstance();
 	}
 
 	/**
@@ -56,7 +64,7 @@ class WebDAVUrlProvider {
 	 * @return string
 	 */
 	public function getURL( Title $title ) {
-		$path = MWNamespace::getCanonicalName( NS_MEDIA );
+		$path = $this->services->getNamespaceInfo()->getCanonicalName( NS_MEDIA );
 		$filename = $title->getDBKey();
 
 		if ( $this->webDAVAuthType === WebDAV::WEBDAV_AUTH_TOKEN ) {
