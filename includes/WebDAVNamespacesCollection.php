@@ -66,6 +66,7 @@ class WebDAVNamespacesCollection extends Sabre\DAV\Collection {
 		$context = \RequestContext::getMain();
 		$language = $context->getLanguage();
 		$user = $context->getUser();
+		$namespaceInfo = $mwServices->getNamespaceInfo();
 		foreach ( $language->getNamespaceIds() as $nsId ) {
 			/* For some strange reasons there are duplicates in the list
 			 * provided by Language object.
@@ -78,25 +79,18 @@ class WebDAVNamespacesCollection extends Sabre\DAV\Collection {
 				continue;
 			}
 
-			if ( MWNamespace::isTalk( $nsId ) && $config->get( 'WebDAVSkipTalkNS' ) ) {
+			if ( $namespaceInfo->isTalk( $nsId ) && $config->get( 'WebDAVSkipTalkNS' ) ) {
 				continue;
 			}
 
 			$dummyTitle = Title::makeTitle( $nsId, 'X' );
-			if ( class_exists( 'MediaWiki\Permissions\PermissionManager' ) ) {
-				// MW 1.33+
-				if ( !$mwServices->getPermissionManager()
+			if ( !$mwServices->getPermissionManager()
 					->userCan( 'read', $user, $dummyTitle )
 				) {
-					continue;
-				}
-			} else {
-				if ( $dummyTitle->userCan( 'read' ) === false ) {
-					continue;
-				}
+				continue;
 			}
 
-			$name = MWNamespace::getCanonicalName( $nsId );
+			$name = $namespaceInfo->getCanonicalName( $nsId );
 			if ( $nsId == NS_MAIN ) {
 				$name = wfMessage( 'webdav-ns-main' )->plain();
 			}

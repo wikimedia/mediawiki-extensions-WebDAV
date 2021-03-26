@@ -20,7 +20,7 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 
 	/**
 	 *
-	 * @var \IContextSource
+	 * @var RequestContext
 	 */
 	protected $oRequestContext;
 
@@ -32,7 +32,7 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 
 	/**
 	 *
-	 * @param \IContextSource $requestContext
+	 * @param RequestContext $requestContext
 	 * @param WebDAVTokenizer $webDAVTokenizer
 	 */
 	public function __construct( $requestContext, $webDAVTokenizer ) {
@@ -66,7 +66,7 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 
 		if ( empty( $token ) ) {
 			$staticToken = $this->getAndRemoveToken( $request, 'stk' );
-			if ( $this->oRequestContext->getUser()->isLoggedIn() ) {
+			if ( $this->oRequestContext->getUser()->isRegistered() ) {
 				if ( $staticToken ) {
 					$this->oWebDAVTokenizer->setUser( $this->oRequestContext->getUser() );
 					$this->oWebDAVTokenizer->renewStaticToken( $staticToken );
@@ -136,7 +136,7 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 		$creds = $auth->getCredentials();
 		// Do not try to login same user again
 		if ( $this->oRequestContext->getUser()->getName() === $creds[0]
-				&& $this->oRequestContext->getUser()->isLoggedIn() ) {
+				&& $this->oRequestContext->getUser()->isRegistered() ) {
 			return [ true, $this->sPrincipalPrefix . $creds[0] ];
 		}
 

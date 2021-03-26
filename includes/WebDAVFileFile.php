@@ -1,6 +1,7 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\SlotRecord;
 
 class WebDAVFileFile extends Sabre\DAV\File {
 	/**
@@ -22,6 +23,16 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	protected $oWikiPage = null;
 
 	/**
+	 * @var User
+	 */
+	protected $user = null;
+
+	/**
+	 * @var MediaWikiServices
+	 */
+	protected $services = null;
+
+	/**
 	 *
 	 * @param File $file
 	 */
@@ -29,6 +40,9 @@ class WebDAVFileFile extends Sabre\DAV\File {
 		$this->oFile = $file;
 		$this->oTitle = $this->oFile->getTitle();
 		$this->oWikiPage = WikiPage::factory( $this->getTitle() );
+
+		$this->user = RequestContext::getMain()->getUser();
+		$this->services = MediaWikiServices::getInstance();
 	}
 
 	/**
@@ -127,12 +141,15 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	 */
 	public function setName( $name ) {
 		$targetTitle = Title::makeTitle( NS_FILE, $name );
-		$result = $this->getTitle()->moveTo( $targetTitle );
-		if ( !$result === true ) {
+
+		$movePage = $this->services->getMovePageFactory()
+			->newMovePage( $this->getTitle(), $targetTitle );
+		$moveStatus = $movePage->moveIfAllowed( $this->user, null, false );
+		if ( !$moveStatus->isOK() ) {
 			wfDebugLog(
 				'WebDAV',
 				__CLASS__ . ': Error when trying to change name of "' . $this->getTitle()->getPrefixedText()
-					. '" to "' . $targetTitle->getPrefixedText() . '": ' . var_export( $result, true )
+					. '" to "' . $targetTitle->getPrefixedText() . '": ' . $moveStatus->getWikiText()
 			);
 			throw new Sabre\DAV\Exception\Forbidden( 'Permission denied to rename file' );
 		}
@@ -146,13 +163,7 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	public function delete() {
 		$reason = wfMessage( 'webdav-default-delete-comment' )->plain();
 		$oFile = $this->oFile;
-
-		if ( method_exists( $oFile, 'deleteFile' ) ) {
-			// MW 1.35+
-			$result = $oFile->deleteFile( $reason, RequestContext::getMain()->getUser() );
-		} else {
-			$result = $oFile->delete( $reason );
-		}
+		$result = $oFile->deleteFile( $reason, RequestContext::getMain()->getUser() );
 
 		if ( !$result === true ) {
 			wfDebugLog(
@@ -193,7 +204,7 @@ class WebDAVFileFile extends Sabre\DAV\File {
 		$user = RequestContext::getMain()->getUser();
 		// reload from DB!
 		$user->clearInstanceCache( 'name' );
-		if ( $user->isBlocked() ) {
+		if ( $user->getBlock() !== null ) {
 			$msg = $user->getName() . " was blocked! Aborting.";
 			wfDebugLog( 'WebDAV', __CLASS__ . ": $msg" );
 			throw new Sabre\DAV\Exception\Forbidden( $msg );
@@ -228,17 +239,15 @@ class WebDAVFileFile extends Sabre\DAV\File {
 			wfDebugLog( 'WebDAV', __CLASS__ . ": $msg" );
 			throw new Sabre\DAV\Exception\Forbidden( $msg );
 		}
-
-		if ( method_exists( MediaWikiServices::class, 'getRepoGroup' ) ) {
-			// MediaWiki 1.34+
-			$repoFile = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $title );
-		} else {
-			$repoFile = wfFindFile( $targetFileName );
-		}
+		$repoFile = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $title );
 		if ( $repoFile !== false ) {
 			$repoFileTitle = $repoFile->getTitle();
 			$page = WikiPage::factory( $repoFileTitle );
-			$page->doEditContent( new WikitextContent( '' ), '' );
+			$comment = CommentStoreComment::newUnsavedComment( '' );
+			$updater = $page->newPageUpdater( $user );
+			// "Null-edit" to invoke hookhandlers like BlueSpiceExtendedSearch
+			$updater->setContent( SlotRecord::MAIN, new WikitextContent( '' ) );
+			$updater->saveRevision( $comment );
 
 			Hooks::run( 'WebDAVPublishToWikiDone', [ $repoFile, $sourceFilePath ] );
 		}

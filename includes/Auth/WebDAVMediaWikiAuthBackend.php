@@ -47,12 +47,7 @@ class WebDAVMediaWikiAuthBackend extends Sabre\DAV\Auth\Backend\AbstractBasic {
 	 * @return bool
 	 */
 	public static function doValidateUserAndPassword( $username, $password ) {
-		if ( method_exists( MediaWikiServices::class, 'getAuthManager' ) ) {
-			// MediaWiki 1.35+
-			$manager = MediaWikiServices::getInstance()->getAuthManager();
-		} else {
-			$manager = AuthManager::singleton();
-		}
+		$manager = MediaWikiServices::getInstance()->getAuthManager();
 		$reqs = AuthenticationRequest::loadRequestsFromSubmission(
 			$manager->getAuthenticationRequests( AuthManager::ACTION_LOGIN ),
 			[
