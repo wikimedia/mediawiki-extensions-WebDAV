@@ -1,14 +1,8 @@
 <?php
 
-// Bail if PHP is too low
-if ( !function_exists( 'version_compare' ) || version_compare( phpversion(), '5.3.2' ) < 0 ) {
-	// We need to use dirname( __FILE__ ) here cause __DIR__ is PHP5.3+
-	require __DIR__ . '/includes/PHPVersionError.php';
-	wfPHPVersionError( 'webdav.php' );
-}
-
 // So extensions (and other code) can check whether they're running in WebDAV mode
 define( 'WEBDAV', true );
+define( 'MW_ENTRY_POINT', 'webdav' );
 
 // Initialise common code.
 if ( isset( $_SERVER['MW_COMPILED'] ) ) {
@@ -62,7 +56,7 @@ try {
 		'webdav.php: User agent: ' . $_SERVER['HTTP_USER_AGENT']
 	);
 
-	$server->exec();
+	$server->start();
 }
 catch ( Exception $e ) {
 	wfDebugLog(

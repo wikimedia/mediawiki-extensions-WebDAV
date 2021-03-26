@@ -14,7 +14,15 @@ class WebDAVFilesCollection extends WebDAVPagesCollection {
 			->getConfigFactory()->makeConfig( 'webdav' );
 
 		$dbr = wfGetDB( DB_REPLICA );
-		$res = $dbr->select( 'image', '*' );
+		$fileQuery = LocalFile::getQueryInfo();
+		$res = $dbr->select(
+			$fileQuery['tables'],
+			$fileQuery['fields'],
+			'*',
+			__METHOD__,
+			[],
+			$fileQuery['joins']
+		);
 
 		$children = [];
 
@@ -48,10 +56,14 @@ class WebDAVFilesCollection extends WebDAVPagesCollection {
 	public function getChild( $name ) {
 		$normalName = str_replace( ' ', '_', $name );
 		$dbr = wfGetDB( DB_REPLICA );
+		$fileQuery = LocalFile::getQueryInfo();
 		$row = $dbr->selectRow(
-			'image',
-			'*',
-			[ 'img_name' => $normalName ]
+			$fileQuery['tables'],
+			$fileQuery['fields'],
+			[ 'img_name' => $normalName ],
+			__METHOD__,
+			[],
+			$fileQuery['joins']
 		);
 		if ( $row === false ) {
 			$msg = 'File not found: ' . $normalName;
