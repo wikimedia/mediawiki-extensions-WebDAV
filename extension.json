@@ -28,9 +28,6 @@
 			"i18n"
 		]
 	},
-	"ExtensionMessagesFiles": {
-		"WebDAVAlias": "languages/WebDAV.alias.php"
-	},
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\WebDAV\\": "src/"
 	},
@@ -43,7 +40,6 @@
 		"WebDAVPageFile": "includes/WebDAVPageFile.php",
 		"WebDAVFilesCollection": "includes/WebDAVFilesCollection.php",
 		"WebDAVFileFile": "includes/WebDAVFileFile.php",
-		"SpecialWebDAVManager": "includes/specials/SpecialWebDAVManager.php",
 		"WebDAVUrlProvider": "includes/WebDAVUrlProvider.php",
 		"WebDAVTokenAuthBackend": "includes/Auth/WebDAVTokenAuthBackend.php",
 		"WebDAVTokenizer": "includes/WebDAVTokenizer.php",

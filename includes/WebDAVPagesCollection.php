@@ -1,11 +1,25 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Revision\SlotRecord;
+
 class WebDAVPagesCollection extends Sabre\DAV\Collection {
 
 	protected $oParent = null;
 	protected $sName = '';
 	protected $iNSId = null;
 	protected $sBasePath = '';
+
+	/**
+	 * @var User
+	 */
+	protected $user = null;
+
+	/**
+	 * @var MediaWikiServices
+	 */
+	protected $services = null;
 
 	/**
 	 *
@@ -19,6 +33,9 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 		$this->sName = $name;
 		$this->iNSId = $nsId;
 		$this->sBasePath = str_replace( ' ', '_', $basePath );
+
+		$this->user = RequestContext::getMain()->getUser();
+		$this->services = MediaWikiServices::getInstance();
 	}
 
 	/**
@@ -26,9 +43,7 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 	 * @return Sabre\DAV\Node[]
 	 */
 	public function getChildren() {
-		$mwServices = \MediaWiki\MediaWikiServices::getInstance();
-		$config = $mwServices->getConfigFactory()->makeConfig( 'webdav' );
-		$user = RequestContext::getMain()->getUser();
+		$config = $this->services->getConfigFactory()->makeConfig( 'webdav' );
 
 		$dbr = wfGetDB( DB_REPLICA );
 
@@ -68,7 +83,8 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 			}
 
 			// This is not the leaf part
-			if ( count( $trimmedTitleParts ) > 1 && MWNamespace::hasSubpages( $this->iNSId ) ) {
+			$namespaceInfo = $this->services->getNamespaceInfo();
+			if ( count( $trimmedTitleParts ) > 1 && $namespaceInfo->hasSubpages( $this->iNSId ) ) {
 				// Prevent duplicates
 				$key = 'COLLECTION_' . $baseTitle;
 				if ( !isset( $children[$key] ) ) {
@@ -78,13 +94,8 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 				}
 			} else {
 				$title = Title::newFromRow( $row );
-				if ( class_exists( 'MediaWiki\Permissions\PermissionManager' ) ) {
-					// MW 1.33+
-					$canRead = $mwServices->getPermissionManager()
-						->userCan( 'read', $user, $title );
-				} else {
-					$canRead = $title->userCan( 'read' );
-				}
+				$canRead = $this->services->getPermissionManager()
+					->userCan( 'read', $this->user, $title );
 				if ( $canRead ) {
 					$children[] = new WebDAVPageFile( $this, $title );
 				}
@@ -136,13 +147,15 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 			stream_get_contents( $data ),
 			$title
 		);
-
-		$status = $wikiPage->doEditContent(
-			$content,
+		$comment = CommentStoreComment::newUnsavedComment(
 			wfMessage( 'webdav-default-edit-comment' )->plain()
 		);
 
-		if ( !$status->isOK() ) {
+		$updater = $wikiPage->newPageUpdater( $this->user );
+		$updater->setContent( SlotRecord::MAIN, $content );
+		$newRevision = $updater->saveRevision( $comment );
+
+		if ( $newRevision instanceof RevisionRecord ) {
 			$msg = 'Error #2 creating page ' . $this->sBasePath . $name . ' in NS ' . $this->iNSId;
 			wfDebugLog( 'WebDAV', __CLASS__ . ': ' . $msg );
 			throw new Sabre\DAV\Exception\Forbidden( $msg );

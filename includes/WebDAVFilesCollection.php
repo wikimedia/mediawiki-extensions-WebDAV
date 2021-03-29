@@ -27,12 +27,7 @@ class WebDAVFilesCollection extends WebDAVPagesCollection {
 		$children = [];
 
 		$regex = $config->get( 'WebDAVInvalidFileNameCharsRegEx' );
-		if ( method_exists( MediaWikiServices::class, 'getRepoGroup' ) ) {
-			// MediaWiki 1.34+
-			$localRepo = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo();
-		} else {
-			$localRepo = RepoGroup::singleton()->getLocalRepo();
-		}
+		$localRepo = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo();
 		foreach ( $res as $row ) {
 			if ( preg_match( $regex, $row->img_name ) !== 0 ) {
 				wfDebugLog( 'WebDAV', __METHOD__ . ': Invalid characters in ' . $row->img_name );
@@ -70,14 +65,8 @@ class WebDAVFilesCollection extends WebDAVPagesCollection {
 			wfDebugLog( 'WebDAV', __CLASS__ . ': ' . $msg );
 			throw new Sabre\DAV\Exception\NotFound( $msg );
 		}
-
-		if ( method_exists( MediaWikiServices::class, 'getRepoGroup' ) ) {
-			// MediaWiki 1.34+
-			$file = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()
-				->newFileFromRow( $row );
-		} else {
-			$file = RepoGroup::singleton()->getLocalRepo()->newFileFromRow( $row );
-		}
+		$file = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()
+			->newFileFromRow( $row );
 		return new WebDAVFileFile( $file );
 	}
 
