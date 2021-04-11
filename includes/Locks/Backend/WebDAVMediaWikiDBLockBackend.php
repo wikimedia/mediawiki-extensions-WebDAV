@@ -57,7 +57,7 @@ class WebDAVMediaWikiDBLockBackend extends \Sabre\DAV\Locks\Backend\AbstractBack
 				}
 			}
 			$lockInfo = new \Sabre\DAV\Locks\LockInfo();
-			$lockInfo->owner = $row->wdl_owner;
+			$lockInfo->owner = (string)$row->wdl_owner;
 			$lockInfo->token = $row->wdl_token;
 			$lockInfo->timeout = $row->wdl_timeout;
 			$lockInfo->created = $row->wdl_created;
@@ -79,7 +79,7 @@ class WebDAVMediaWikiDBLockBackend extends \Sabre\DAV\Locks\Backend\AbstractBack
 		$config = \MediaWiki\MediaWikiServices::getInstance()
 			->getConfigFactory()->makeConfig( 'webdav' );
 
-		$lockInfo->owner = RequestContext::getMain()->getUser()->getId();
+		$lockInfo->owner = (string)RequestContext::getMain()->getUser()->getId();
 		$lockInfo->timeout = $config->get( 'WebDAVLockTimeOut' );
 		$lockInfo->created = time();
 		$lockInfo->uri = $uri;
@@ -100,7 +100,7 @@ class WebDAVMediaWikiDBLockBackend extends \Sabre\DAV\Locks\Backend\AbstractBack
 			$res = $dbw->update(
 				'webdav_locks',
 				[
-					'wdl_owner' => $lockInfo->owner,
+					'wdl_owner' => (int)$lockInfo->owner,
 					'wdl_timeout' => $lockInfo->timeout,
 					'wdl_scope' => $lockInfo->scope,
 					'wdl_depth' => $lockInfo->depth,
@@ -116,7 +116,7 @@ class WebDAVMediaWikiDBLockBackend extends \Sabre\DAV\Locks\Backend\AbstractBack
 			$res = $dbw->insert(
 				'webdav_locks',
 				[
-					'wdl_owner' => $lockInfo->owner,
+					'wdl_owner' => (int)$lockInfo->owner,
 					'wdl_timeout' => $lockInfo->timeout,
 					'wdl_scope' => $lockInfo->scope,
 					'wdl_depth' => $lockInfo->depth,
