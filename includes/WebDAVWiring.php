@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'WebDAVUrlProvider' => function ( \MediaWiki\MediaWikiServices $services ) {
+	'WebDAVUrlProvider' => static function ( \MediaWiki\MediaWikiServices $services ) {
 		$config = $services->getMainConfig();
 
 		$user = RequestContext::getMain()->getUser();
@@ -14,7 +14,7 @@ return [
 				$user
 		);
 	},
-	'WebDAVTokenizer' => function ( \MediaWiki\MediaWikiServices $services ) {
+	'WebDAVTokenizer' => static function ( \MediaWiki\MediaWikiServices $services ) {
 		$config = $services->getMainConfig();
 
 		$db = wfGetDB( DB_MASTER );

@@ -44,15 +44,15 @@ class WebDAVTempFilePlugin extends \Sabre\DAV\TemporaryFileFilterPlugin {
 			return false;
 		}
 		switch ( $request->getMethod() ) {
-			case 'GET' :
+			case 'GET':
 				return $this->httpGet( $request, $response, $tempLocation );
-			case 'PUT' :
+			case 'PUT':
 				return $this->httpPut( $request, $response, $tempLocation );
-			case 'PROPFIND' :
+			case 'PROPFIND':
 				return $this->httpPropfind( $request, $response, $tempLocation );
-			case 'DELETE' :
+			case 'DELETE':
 				return $this->httpDelete( $request, $response, $tempLocation );
-			case 'PROPPATCH' :
+			case 'PROPPATCH':
 				return $this->httpProppatch( $request, $response, $tempLocation );
 		}
 	}
