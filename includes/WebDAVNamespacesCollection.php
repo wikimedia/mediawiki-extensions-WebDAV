@@ -12,7 +12,6 @@ class WebDAVNamespacesCollection extends Sabre\DAV\Collection {
 	}
 
 	/**
-	 * @global Language $wgContLang
 	 * @return array of Nodes
 	 */
 	protected function makeChildren() {
