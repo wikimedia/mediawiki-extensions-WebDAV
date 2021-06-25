@@ -38,11 +38,6 @@ class Handler implements IPrivacyHandler {
 		);
 
 		$this->db->delete(
-			'webdav_saves',
-			[ 'wds_user_id' => $userToDelete->getId() ]
-		);
-
-		$this->db->delete(
 			'webdav_static_tokens',
 			[ 'wdst_user_id' => $userToDelete->getId() ]
 		);
