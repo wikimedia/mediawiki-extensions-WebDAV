@@ -97,7 +97,7 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 	 * @return string $sToken
 	 */
 	protected function getAndRemoveToken( RequestInterface $request, $prefix = 'tkn' ) {
-		$url = $request->getUrl();
+		$url = urldecode( $request->getUrl() );
 		$urlPieces = explode( '/', $url );
 
 		$rawToken = '';
