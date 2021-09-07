@@ -71,5 +71,5 @@ catch ( Exception $e ) {
 }
 
 $factory = \MediaWiki\MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-$factory->commitMasterChanges();
+$factory->commitPrimaryChanges();
 $factory->shutdown();

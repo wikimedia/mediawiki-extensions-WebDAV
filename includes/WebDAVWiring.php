@@ -17,7 +17,7 @@ return [
 	'WebDAVTokenizer' => static function ( \MediaWiki\MediaWikiServices $services ) {
 		$config = $services->getMainConfig();
 
-		$db = wfGetDB( DB_MASTER );
+		$db = wfGetDB( DB_PRIMARY );
 
 		return new WebDAVTokenizer(
 			$db,

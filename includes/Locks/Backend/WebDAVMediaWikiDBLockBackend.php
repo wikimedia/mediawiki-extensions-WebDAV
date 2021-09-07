@@ -94,7 +94,7 @@ class WebDAVMediaWikiDBLockBackend extends \Sabre\DAV\Locks\Backend\AbstractBack
 			}
 		}
 
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 
 		if ( $exists ) {
 			$res = $dbw->update(
@@ -137,7 +137,7 @@ class WebDAVMediaWikiDBLockBackend extends \Sabre\DAV\Locks\Backend\AbstractBack
 	 * @return bool
 	 */
 	public function unlock( $uri, \Sabre\DAV\Locks\LockInfo $lockInfo ) {
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 		$res = $dbw->delete(
 			'webdav_locks',
 			[
@@ -156,7 +156,7 @@ class WebDAVMediaWikiDBLockBackend extends \Sabre\DAV\Locks\Backend\AbstractBack
 	 * @return bool
 	 */
 	protected function deleteLock( $lockId ) {
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 		$res = $dbw->delete(
 			'webdav_locks',
 			[
