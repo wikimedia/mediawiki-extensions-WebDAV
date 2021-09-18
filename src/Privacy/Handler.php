@@ -3,15 +3,16 @@
 namespace MediaWiki\Extension\WebDAV\Privacy;
 
 use BlueSpice\Privacy\IPrivacyHandler;
+use Wikimedia\Rdbms\IDatabase;
 
 class Handler implements IPrivacyHandler {
 	protected $db;
 
 	/**
 	 *
-	 * @param \Database $db
+	 * @param IDatabase $db
 	 */
-	public function __construct( \Database $db ) {
+	public function __construct( IDatabase $db ) {
 		$this->db = $db;
 	}
 
