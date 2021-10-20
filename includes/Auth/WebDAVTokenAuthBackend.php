@@ -150,7 +150,7 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 				. "send one, or the server is misconfigured" ];
 		}
 
-		if ( !$this->validateUserPass( $creds[0], $creds[1], $staticToken ) ) {
+		if ( !$this->validateUserPass( $creds[0], $creds[1] ) ) {
 			return [ false, "Username or password was incorrect" ];
 		}
 
@@ -166,19 +166,15 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 	 *
 	 * @param string $username
 	 * @param string $password
-	 * @param string $staticToken
 	 * @return bool
 	 */
-	protected function validateUserPass( $username, $password, $staticToken ) {
+	protected function validateUserPass( $username, $password ) {
 		$username = utf8_encode( $username );
 		$password = utf8_encode( $password );
 
 		$user = User::newFromName( $username );
 		$result = false;
 		if ( $user instanceof User ) {
-			if ( $this->checkStaticToken( $staticToken, $user ) === false ) {
-				return false;
-			}
 			if ( WebDAVMediaWikiAuthBackend::doValidateUserAndPassword( $user->getName(), $password ) ) {
 				$this->doLogInUser( $user );
 				$result = true;
@@ -244,5 +240,4 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 		$this->oWebDAVTokenizer->setUser( $user );
 		return $this->oWebDAVTokenizer->checkStaticToken( $staticToken );
 	}
-
 }
