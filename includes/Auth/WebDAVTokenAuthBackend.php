@@ -1,5 +1,6 @@
 <?php
 
+use MediaWiki\Extension\WebDAV\WebDAVCredentialAuthProvider;
 use Sabre\DAV\Auth\Backend\BackendInterface;
 use Sabre\HTTP\RequestInterface;
 use Sabre\HTTP\ResponseInterface;
@@ -29,15 +30,21 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 	 * @var WebDAVTokenizer
 	 */
 	protected $oWebDAVTokenizer;
+	/** @var WebDAVCredentialAuthProvider */
+	protected $credentialAuthProvider;
 
 	/**
 	 *
 	 * @param RequestContext $requestContext
 	 * @param WebDAVTokenizer $webDAVTokenizer
+	 * @param WebDAVCredentialAuthProvider $credentialAuthProvider
 	 */
-	public function __construct( $requestContext, $webDAVTokenizer ) {
+	public function __construct(
+		$requestContext, $webDAVTokenizer, WebDAVCredentialAuthProvider $credentialAuthProvider
+	) {
 		$this->oRequestContext = $requestContext;
 		$this->oWebDAVTokenizer = $webDAVTokenizer;
+		$this->credentialAuthProvider = $credentialAuthProvider;
 	}
 
 	/**
@@ -51,7 +58,7 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 	/**
 	 * Does 3-way authorization
 	 * - First checks URL for token
-	 * - Looks at session cookie, to determine if and which user is looged in
+	 * - Looks at session cookie, to determine if and which user is logged in
 	 * - Tries traditional Basic Auth authorization
 	 * - - If Basic Auth header is not present, tries to log in user from static token
 	 *
@@ -169,19 +176,13 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 	 * @return bool
 	 */
 	protected function validateUserPass( $username, $password ) {
-		$username = utf8_encode( $username );
-		$password = utf8_encode( $password );
-
-		$user = User::newFromName( $username );
-		$result = false;
+		$user = $this->credentialAuthProvider->getValidatedUser( $username, $password );
 		if ( $user instanceof User ) {
-			if ( WebDAVMediaWikiAuthBackend::doValidateUserAndPassword( $user->getName(), $password ) ) {
-				$this->doLogInUser( $user );
-				$result = true;
-			}
+			$this->doLogInUser( $user );
+			return true;
 		}
 
-		return $result;
+		return false;
 	}
 
 	/**

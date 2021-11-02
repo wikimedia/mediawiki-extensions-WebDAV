@@ -17,6 +17,13 @@
 			"Handlers": [
 				"\\MediaWiki\\Extension\\WebDAV\\Privacy\\Handler"
 			]
+		},
+		"WebDAV": {
+			"CredentialAuthProviders": {
+				"mw-auth": {
+					"class": "MediaWiki\\Extension\\WebDAV\\CredentialAuthProvider\\MediaWikiAuth"
+				}
+			}
 		}
 	},
 	"callback": "\\MediaWiki\\Extension\\WebDAV\\Extension::onRegistration",
@@ -100,6 +107,10 @@
 		},
 		"WebDAVInvalidateTokenOnUnlock": {
 			"value": true
+		},
+		"WebDAVCredentialAuthProvider": {
+			"description": "Which of the registered credential auth providers to use",
+			"value": "mw-auth"
 		}
 	},
 	"load_composer_autoloader": true,
