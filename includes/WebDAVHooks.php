@@ -35,20 +35,26 @@ class WebDAVHooks {
 	 * @return true
 	 */
 	public static function onWebDAVPlugins( $server, &$plugins ) {
-		$config = \MediaWiki\MediaWikiServices::getInstance()
-				->getConfigFactory()->makeConfig( 'webdav' );
+		$services = \MediaWiki\MediaWikiServices::getInstance();
+		$config = $services->getConfigFactory()->makeConfig( 'webdav' );
 		$requestContext = RequestContext::getMain();
 		$webDAVTokenizer = \MediaWiki\MediaWikiServices::getInstance()->getService( 'WebDAVTokenizer' );
 
 		switch ( $config->get( 'WebDAVAuthType' ) ) {
 			case WebDAV::WEBDAV_AUTH_MW:
 				$plugins['auth'] = new \Sabre\DAV\Auth\Plugin(
-						new WebDAVMediaWikiAuthBackend( $requestContext )
+						new WebDAVMediaWikiAuthBackend(
+							$requestContext,
+							$services->getService( 'WebDAVCredentialAuthProvider' )
+						)
 					);
 				break;
 			case WebDAV::WEBDAV_AUTH_TOKEN:
 				$plugins['auth'] = new \Sabre\DAV\Auth\Plugin(
-						new WebDAVTokenAuthBackend( $requestContext, $webDAVTokenizer )
+						new WebDAVTokenAuthBackend(
+							$requestContext, $webDAVTokenizer,
+							$services->getService( 'WebDAVCredentialAuthProvider' )
+						)
 					);
 				break;
 		}
