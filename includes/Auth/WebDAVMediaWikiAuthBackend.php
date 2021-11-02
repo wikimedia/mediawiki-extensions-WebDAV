@@ -2,9 +2,7 @@
 // HINT in SabreDAV 2.x there will be Sabre\DAV\Auth\Backend\BasicCallback
 // available as an alternative to this implemenation
 
-use MediaWiki\Auth\AuthManager;
-use MediaWiki\Auth\AuthenticationRequest;
-use MediaWiki\Auth\AuthenticationResponse;
+use MediaWiki\Extension\WebDAV\WebDAVCredentialAuthProvider;
 
 class WebDAVMediaWikiAuthBackend extends Sabre\DAV\Auth\Backend\AbstractBasic {
 
@@ -13,13 +11,19 @@ class WebDAVMediaWikiAuthBackend extends Sabre\DAV\Auth\Backend\AbstractBasic {
 	 * @var \IContextSource
 	 */
 	protected $requestContext = null;
+	/** @var WebDAVCredentialAuthProvider */
+	protected $credentialAuthProvider;
 
 	/**
 	 *
 	 * @param \IContextSource $requestContext
+	 * @param WebDAVCredentialAuthProvider $credentialAuthProvider
 	 */
-	public function __construct( $requestContext ) {
+	public function __construct(
+		$requestContext, WebDAVCredentialAuthProvider $credentialAuthProvider
+	) {
 		$this->requestContext = $requestContext;
+		$this->credentialAuthProvider = $credentialAuthProvider;
 	}
 
 	/**
@@ -29,35 +33,14 @@ class WebDAVMediaWikiAuthBackend extends Sabre\DAV\Auth\Backend\AbstractBasic {
 	 * @return bool
 	 */
 	protected function validateUserPass( $username, $password ) {
-		$username = utf8_encode( $username );
-		$password = utf8_encode( $password );
+		$user = $this->credentialAuthProvider->getValidatedUser( $username, $password );
 
-		if ( static::doValidateUserAndPassword( $username, $password ) ) {
-			$user = User::newFromName( $username );
-			RequestContext::getMain()->setUser( $user );
-			global $wgUser;
-			$wgUser = $user;
+		if ( $user === null ) {
+			return false;
 		}
-	}
 
-	/**
-	 * @param string $username
-	 * @param string $password
-	 * @return bool
-	 */
-	public static function doValidateUserAndPassword( $username, $password ) {
-		$manager = AuthManager::singleton();
-		$reqs = AuthenticationRequest::loadRequestsFromSubmission(
-			$manager->getAuthenticationRequests( AuthManager::ACTION_LOGIN ),
-			[
-				'username' => $username,
-				'password' => $password,
-			]
-		);
-		$res = AuthManager::singleton()->beginAuthentication( $reqs, 'null:' );
-		if ( $res->status === AuthenticationResponse::PASS ) {
-			return true;
-		}
-		return false;
+		$this->requestContext->setUser( $user );
+		$GLOBALS['wgUser'] = $user;
+		return true;
 	}
 }

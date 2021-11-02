@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\Extension\WebDAV\WebDAVCredentialAuthProvider;
+
 return [
 	'WebDAVUrlProvider' => function ( \MediaWiki\MediaWikiServices $services ) {
 		$config = $services->getMainConfig();
@@ -26,5 +28,33 @@ return [
 			$config->get( 'WebDAVUserNameAsStaticToken' ),
 			$config->get( 'WebDAVInvalidateTokenOnUnlock' )
 		);
+	},
+	'WebDAVCredentialAuthProvider' => function ( \MediaWiki\MediaWikiServices $services ) {
+		$config = $services->getMainConfig();
+		$authProviderKey = $config->get( 'WebDAVCredentialAuthProvider' );
+		$attribute = ExtensionRegistry::getInstance()->getAttribute(
+			'WebDAVCredentialAuthProviders'
+		);
+
+		if ( !isset( $attribute[$authProviderKey] ) ) {
+			throw new MWException(
+				"CredentialAuthProvider with key $authProviderKey is not registered"
+			);
+		}
+		$spec = $attribute[$authProviderKey];
+		$instance = null;
+		if ( $services->hasService( 'ObjectFactory' ) ) {
+			$instance = $services->getService( 'ObjectFactory' )->createObject( $spec );
+		} else {
+			$instance = \Wikimedia\ObjectFactory::getObjectFromSpec( $spec );
+		}
+
+		if ( !$instance instanceof WebDAVCredentialAuthProvider ) {
+			throw new MWException(
+				'CredentialAuthProvider must be instance of ' . WebDAVCredentialAuthProvider::class
+			);
+		}
+
+		return $instance;
 	}
 ];
