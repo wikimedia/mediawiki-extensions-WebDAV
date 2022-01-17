@@ -1,6 +1,8 @@
 {
 	"@metadata": {
-		"authors": []
+		"authors": [
+			"Mschlindwein"
+		]
 	},
 	"webdav-desc": "Stellt die Inhalte des Wikis über einen WebDAV-Endpunkt zur Verfügung",
 	"webdavmanager": "WebDAV Verwaltung",
@@ -10,5 +12,5 @@
 	"webdav-default-move-comment": "Über WebDAV verschoben",
 	"prefs-webdav": "WebDAV",
 	"webdav-statictoken-prefs": "WebDAV statische URL",
-	"webdav-statictoken-prefs-help": "Verwenden Sie diese URL, um das WebDAV-Netzlaufwerk zu verbinden"
+	"webdav-statictoken-prefs-help": "Verwende diese URL, um das WebDAV-Netzlaufwerk zu verbinden"
 }

@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mschlindwein"
+		]
+	},
+	"webdav-statictoken-prefs-help": "Verwenden Sie diese URL, um das WebDAV-Netzlaufwerk zu verbinden"
+}
