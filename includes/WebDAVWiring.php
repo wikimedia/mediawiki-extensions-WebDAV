@@ -46,7 +46,7 @@ return [
 		if ( $services->hasService( 'ObjectFactory' ) ) {
 			$instance = $services->getService( 'ObjectFactory' )->createObject( $spec );
 		} else {
-			$instance = \Wikimedia\ObjectFactory::getObjectFromSpec( $spec );
+			$instance = \Wikimedia\ObjectFactory\ObjectFactory::getObjectFromSpec( $spec );
 		}
 
 		if ( !$instance instanceof WebDAVCredentialAuthProvider ) {
