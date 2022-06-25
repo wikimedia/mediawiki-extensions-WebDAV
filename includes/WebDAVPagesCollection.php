@@ -141,7 +141,7 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 			wfDebugLog( 'WebDAV', __CLASS__ . ': ' . $msg );
 			throw new Sabre\DAV\Exception\Forbidden( $msg );
 		}
-		$wikiPage = WikiPage::factory( $title );
+		$wikiPage = $this->services->getWikiPageFactory()->newFromTitle( $title );
 
 		$content = ContentHandler::makeContent(
 			stream_get_contents( $data ),

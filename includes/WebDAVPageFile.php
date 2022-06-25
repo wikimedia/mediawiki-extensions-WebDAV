@@ -1,5 +1,6 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 
@@ -36,7 +37,7 @@ class WebDAVPageFile extends Sabre\DAV\File {
 	public function __construct( $parent, $title ) {
 		$this->oParent = $parent;
 		$this->oTitle = $title;
-		$this->oWikiPage = WikiPage::factory( $title );
+		$this->oWikiPage = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $title );
 
 		$this->user = RequestContext::getMain()->getUser();
 	}

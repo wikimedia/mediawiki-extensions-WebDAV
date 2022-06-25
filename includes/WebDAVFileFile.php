@@ -39,7 +39,7 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	public function __construct( $file ) {
 		$this->oFile = $file;
 		$this->oTitle = $this->oFile->getTitle();
-		$this->oWikiPage = WikiPage::factory( $this->getTitle() );
+		$this->oWikiPage = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $this->getTitle() );
 
 		$this->user = RequestContext::getMain()->getUser();
 		$this->services = MediaWikiServices::getInstance();
@@ -242,7 +242,7 @@ class WebDAVFileFile extends Sabre\DAV\File {
 		$repoFile = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $title );
 		if ( $repoFile !== false ) {
 			$repoFileTitle = $repoFile->getTitle();
-			$page = WikiPage::factory( $repoFileTitle );
+			$page = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $repoFileTitle );
 			$comment = CommentStoreComment::newUnsavedComment( '' );
 			$updater = $page->newPageUpdater( $user );
 			// "Null-edit" to invoke hookhandlers like BlueSpiceExtendedSearch
