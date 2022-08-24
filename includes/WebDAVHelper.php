@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * Class houses static utility functions
  */
@@ -17,7 +19,8 @@ class WebDAVHelper {
 		}
 
 		$filename = '';
-		if ( !Hooks::run( 'WebDAVGetFilenameFromUrl', [ &$filename, $url ] ) ) {
+		$hookContainer = MediaWikiServices::getInstance()->getHookContainer();
+		if ( !$hookContainer->run( 'WebDAVGetFilenameFromUrl', [ &$filename, $url ] ) ) {
 			return $filename;
 		}
 
