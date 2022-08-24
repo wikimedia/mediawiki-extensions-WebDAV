@@ -1,6 +1,16 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 class WebDAVMediaWikiDBLockBackend extends \Sabre\DAV\Locks\Backend\AbstractBackend {
+
+	/** @var MediaWikiServices */
+	private $services = null;
+
+	public function __construct() {
+		$this->services = MediaWikiServices::getInstance();
+	}
+
 	/**
 	 *
 	 * @param string $uri
@@ -47,10 +57,11 @@ class WebDAVMediaWikiDBLockBackend extends \Sabre\DAV\Locks\Backend\AbstractBack
 
 		$lockList = [];
 		$now = wfTimestamp( TS_UNIX );
+		$hookContainer = $this->services->getHookContainer();
 		foreach ( $res as $row ) {
 			$lockExpiraton = wfTimestamp( TS_UNIX, (int)$row->wdl_created + (int)$row->wdl_timeout );
 			if ( $lockExpiraton < $now ) {
-				\Hooks::run( 'WebDAVGetLocksExpired', [ $row->wdl_uri, $row->wdl_owner ] );
+				$hookContainer->run( 'WebDAVGetLocksExpired', [ $row->wdl_uri, $row->wdl_owner ] );
 				$bLockDeleted = $this->deleteLock( $row->wdl_id );
 				if ( $bLockDeleted ) {
 					continue;
@@ -76,8 +87,7 @@ class WebDAVMediaWikiDBLockBackend extends \Sabre\DAV\Locks\Backend\AbstractBack
 	 * @return bool
 	 */
 	public function lock( $uri, \Sabre\DAV\Locks\LockInfo $lockInfo ) {
-		$config = \MediaWiki\MediaWikiServices::getInstance()
-			->getConfigFactory()->makeConfig( 'webdav' );
+		$config = $this->services->getConfigFactory()->makeConfig( 'webdav' );
 
 		$lockInfo->owner = (string)RequestContext::getMain()->getUser()->getId();
 		$lockInfo->timeout = $config->get( 'WebDAVLockTimeOut' );
@@ -146,7 +156,8 @@ class WebDAVMediaWikiDBLockBackend extends \Sabre\DAV\Locks\Backend\AbstractBack
 			]
 		);
 		$unlockSuccess = $res !== false;
-		\Hooks::run( 'WebDAVLocksUnlock', [ &$unlockSuccess, $lockInfo ] );
+		$hookContainer = $this->services->getHookContainer();
+		$hookContainer->run( 'WebDAVLocksUnlock', [ &$unlockSuccess, $lockInfo ] );
 		return $unlockSuccess;
 	}
 
