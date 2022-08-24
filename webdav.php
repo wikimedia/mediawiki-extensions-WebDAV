@@ -13,13 +13,15 @@ if ( isset( $_SERVER['MW_COMPILED'] ) ) {
 	require $baseDir . '/includes/WebStart.php';
 }
 
+use MediaWiki\MediaWikiServices;
 use Sabre\DAV;
+
+$services = MediaWikiServices::getInstance();
 
 # \Sabre\DAV\Property\LockDiscovery::$hideLockRoot = true; //This is if Microsoft Office has issues;
 #  See http://sabre.io/dav/clients/msoffice/
 try {
-	$config = \MediaWiki\MediaWikiServices::getInstance()
-			->getConfigFactory()->makeConfig( 'webdav' );
+	$config = $services->getConfigFactory()->makeConfig( 'webdav' );
 	$rootNode = $config->get( 'WebDAVRootNode' );
 	$server = new DAV\Server( new $rootNode() );
 	$server->setBaseUri( $config->get( 'WebDAVBaseUri' ) );
@@ -34,7 +36,8 @@ try {
 		'temporaryFileFilter' => new WebDAVTempFilePlugin( wfTempDir() )
 	];
 
-	\Hooks::run( 'WebDAVPlugins', [ $server, &$plugins ] );
+	$hookContainer = $services->getHookContainer();
+	$hookContainer->run( 'WebDAVPlugins', [ $server, &$plugins ] );
 	foreach ( $plugins as $pluginkey => $plugin ) {
 		$server->addPlugin( $plugin );
 	}
@@ -70,6 +73,6 @@ catch ( Exception $e ) {
 	# throw $e;
 }
 
-$factory = \MediaWiki\MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+$factory = $services->getDBLoadBalancerFactory();
 $factory->commitPrimaryChanges();
 $factory->shutdown();

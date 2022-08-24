@@ -127,7 +127,8 @@ class WebDAVFileFile extends Sabre\DAV\File {
 		fwrite( $fp, $data );
 		fclose( $fp );
 
-		if ( !Hooks::run( 'WebDAVFileFilePutBeforePublish', [ $tmpPath, $this->oFile ] ) ) {
+		$hookContainer = $this->services->getHookContainer();
+		if ( !$hookContainer->run( 'WebDAVFileFilePutBeforePublish', [ $tmpPath, $this->oFile ] ) ) {
 			return;
 		}
 
@@ -187,8 +188,10 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	 */
 	public static function publishToWiki( $sourceFilePath, $targetFileName ) {
 		global $wgLocalFileRepo;
+		$services = MediaWikiServices::getInstance();
 
-		if ( !Hooks::run( 'WebDAVPublishToWiki', [ $sourceFilePath, $targetFileName ] ) ) {
+		$hookContainer = $services->getHookContainer();
+		if ( !$hookContainer->run( 'WebDAVPublishToWiki', [ $sourceFilePath, $targetFileName ] ) ) {
 			return;
 		}
 		# Validate a title
@@ -239,7 +242,7 @@ class WebDAVFileFile extends Sabre\DAV\File {
 			wfDebugLog( 'WebDAV', __CLASS__ . ": $msg" );
 			throw new Sabre\DAV\Exception\Forbidden( $msg );
 		}
-		$repoFile = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $title );
+		$repoFile = $services->getRepoGroup()->findFile( $title );
 		if ( $repoFile !== false ) {
 			$repoFileTitle = $repoFile->getTitle();
 			$page = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $repoFileTitle );
@@ -249,7 +252,7 @@ class WebDAVFileFile extends Sabre\DAV\File {
 			$updater->setContent( SlotRecord::MAIN, new WikitextContent( '' ) );
 			$updater->saveRevision( $comment );
 
-			Hooks::run( 'WebDAVPublishToWikiDone', [ $repoFile, $sourceFilePath ] );
+			$hookContainer->run( 'WebDAVPublishToWikiDone', [ $repoFile, $sourceFilePath ] );
 		}
 	}
 
@@ -279,8 +282,7 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	 * @return string a tmp filename for file system storage
 	 */
 	public static function makeTmpFileName( $name ) {
-		$config = \MediaWiki\MediaWikiServices::getInstance()
-			->getConfigFactory()->makeConfig( 'webdav' );
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'webdav' );
 
 		$name = preg_replace(
 			$config->get( 'WebDAVInvalidFileNameCharsRegEx' ),

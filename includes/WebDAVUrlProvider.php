@@ -71,7 +71,8 @@ class WebDAVUrlProvider {
 			$sToken = $this->getToken( $filename );
 			$path = $sToken . $path;
 		}
-		\Hooks::run( 'WebDAVUrlProviderGetUrl', [ &$path, &$filename, $title ] );
+		$hookContainer = $this->services->getHookContainer();
+		$hookContainer->run( 'WebDAVUrlProviderGetUrl', [ &$path, &$filename, $title ] );
 
 		$sUrl = $this->sServer . $this->sWebDAVUrlBaseUri . $path . '/' . $filename;
 
@@ -84,7 +85,7 @@ class WebDAVUrlProvider {
 	 * @return string
 	 */
 	protected function getToken( $filename ) {
-		$webDAVTokenizer = \MediaWiki\MediaWikiServices::getInstance()->getService( 'WebDAVTokenizer' );
+		$webDAVTokenizer = $this->services->getService( 'WebDAVTokenizer' );
 		$webDAVTokenizer->setUser( $this->oUser );
 		return 'tkn' . $webDAVTokenizer->getTokenForFile( $filename ) . '/';
 	}
