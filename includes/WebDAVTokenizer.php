@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 class WebDAVTokenizer {
 	protected $oUser;
 	protected $oDB;
@@ -103,7 +105,7 @@ class WebDAVTokenizer {
 			return null;
 		}
 		$userId = $res->wdt_user_id;
-		return User::newFromId( $userId );
+		return MediaWikiServices::getInstance()->getUserFactory()->newFromId( $userId );
 	}
 
 	/**
