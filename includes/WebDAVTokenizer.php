@@ -235,7 +235,7 @@ class WebDAVTokenizer {
 			return null;
 		}
 		$userId = $res->wdst_user_id;
-		return User::newFromId( $userId );
+		return MediaWikiServices::getInstance()->getUserFactory()->newFromId( $userId );
 	}
 
 	/**
