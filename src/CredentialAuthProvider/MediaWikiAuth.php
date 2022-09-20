@@ -7,7 +7,6 @@ use MediaWiki\Auth\AuthenticationResponse;
 use MediaWiki\Auth\AuthManager;
 use MediaWiki\Extension\WebDAV\WebDAVCredentialAuthProvider;
 use MediaWiki\MediaWikiServices;
-use User;
 
 class MediaWikiAuth implements WebDAVCredentialAuthProvider {
 
@@ -18,7 +17,8 @@ class MediaWikiAuth implements WebDAVCredentialAuthProvider {
 		$username = utf8_encode( $username );
 		$password = utf8_encode( $password );
 
-		$manager = MediaWikiServices::getInstance()->getAuthManager();
+		$services = MediaWikiServices::getInstance();
+		$manager = $services->getAuthManager();
 		$reqs = AuthenticationRequest::loadRequestsFromSubmission(
 			$manager->getAuthenticationRequests( AuthManager::ACTION_LOGIN ),
 			[
@@ -28,7 +28,7 @@ class MediaWikiAuth implements WebDAVCredentialAuthProvider {
 		);
 		$res = $manager->beginAuthentication( $reqs, 'null' );
 		if ( $res->status === AuthenticationResponse::PASS ) {
-			return User::newFromName( $username );
+			return $services->getUserFactory()->newFromName( $username );
 		}
 
 		return null;
