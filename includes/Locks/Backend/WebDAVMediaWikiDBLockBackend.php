@@ -5,7 +5,7 @@ use MediaWiki\MediaWikiServices;
 class WebDAVMediaWikiDBLockBackend extends \Sabre\DAV\Locks\Backend\AbstractBackend {
 
 	/** @var MediaWikiServices */
-	private $services = null;
+	protected $services = null;
 
 	public function __construct() {
 		$this->services = MediaWikiServices::getInstance();
