@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"webdav-desc": "Adde un puncto de termination WebDAV que expone le contento del wiki",
+	"webdavmanager": "Gestor WebDAV",
+	"webdav-ns-main": "(Paginas)",
+	"webdav-default-edit-comment": "Modificate per medio de WebDAV",
+	"webdav-default-delete-comment": "Delite per medio de WebDAV",
+	"webdav-default-move-comment": "Renominate per medio de WebDAV",
+	"prefs-webdav": "WebDAV",
+	"webdav-statictoken-prefs": "URL static de WebDAV",
+	"webdav-statictoken-prefs-help": "Usa iste URL pro montar un unitate de rete WebDAV"
+}
