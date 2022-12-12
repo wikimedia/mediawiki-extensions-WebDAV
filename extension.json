@@ -2,6 +2,7 @@
 	"name": "WebDAV",
 	"version": "3.1.0",
 	"author": [
+		"[https://www.hallowelt.com Hallo Welt! GmbH]",
 		"Robert Vogel (Hallo Welt! GmbH)",
 		"Dejan Savuljesku (Hallo Welt! GmbH)"
 	],
