@@ -4,5 +4,12 @@
 			"Amire80"
 		]
 	},
+	"webdav-desc": "מוסיף נקודת קצה של WebDAV שחושפת את תוכן הוויקי",
+	"webdavmanager": "מנהל WebDAV",
+	"webdav-ns-main": "(דפים)",
+	"webdav-default-edit-comment": "נערך באמצעות WebDAV",
+	"webdav-default-delete-comment": "נמחק באמצעות WebDAV",
+	"webdav-default-move-comment": "הועבר באמצעות WebDAV",
+	"webdav-statictoken-prefs": "כתובת URL סטטית של WebDAV",
 	"webdav-statictoken-prefs-help": "יש להשתמש בכתוב ה־URL הזאת כדי להרכיב כונן רשת WebDAV"
 }
