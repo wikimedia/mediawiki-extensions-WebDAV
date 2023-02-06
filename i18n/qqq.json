@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Umherirrender"
 		]
 	},
@@ -10,7 +11,7 @@
 	"webdav-default-edit-comment": "Text of the edit comment in revision history in case a user edits a page with WebDAV",
 	"webdav-default-delete-comment": "Text of the edit comment in revision history in case a user deletes a page with WebDAV",
 	"webdav-default-move-comment": "Text of the edit comment in revision history in case a user renames a page with WebDAV",
-	"prefs-webdav": "Label for a fieldset on [[Special:Preferences]]",
+	"prefs-webdav": "{{optional}}\nLabel for a fieldset on [[Special:Preferences]]",
 	"webdav-statictoken-prefs": "Label of a field on [[Special:Preferences]] that shows the access URL for an user",
 	"webdav-statictoken-prefs-help": "Help text of a field on [[Special:Preferences]] that shows the access URL for an user"
 }
