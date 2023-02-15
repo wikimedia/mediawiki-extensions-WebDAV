@@ -10,7 +10,6 @@
 	"webdav-default-edit-comment": "Уредено преку WebDAV",
 	"webdav-default-delete-comment": "Избришано преку WebDAV",
 	"webdav-default-move-comment": "Преместено преку WebDAV",
-	"prefs-webdav": "WebDAV",
 	"webdav-statictoken-prefs": "Непроменлива URL на WebDAV",
 	"webdav-statictoken-prefs-help": "Применете ја оваа URL за да го поставите мрежниот погон WebDAV"
 }

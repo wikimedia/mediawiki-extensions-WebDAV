@@ -10,7 +10,6 @@
 	"webdav-default-edit-comment": "Отредактировано через WebDAV",
 	"webdav-default-delete-comment": "Удалено через WebDAV",
 	"webdav-default-move-comment": "Переименовано через WebDAV",
-	"prefs-webdav": "WebDAV",
 	"webdav-statictoken-prefs": "Статический URL для WebDAV",
 	"webdav-statictoken-prefs-help": "Используйте этот URL, чтобы настроить сетевое устройство WebDAV"
 }

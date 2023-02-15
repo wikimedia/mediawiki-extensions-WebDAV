@@ -10,7 +10,6 @@
 	"webdav-default-edit-comment": "Cangiate cu WebDAV",
 	"webdav-default-delete-comment": "Scangellate cu WebDAV",
 	"webdav-default-move-comment": "Spustate cu WebDAV",
-	"prefs-webdav": "WebDAV",
 	"webdav-statictoken-prefs": "URL stateche de WebDAV",
 	"webdav-statictoken-prefs-help": "Ause sta URL pe mundà 'u drive de rezze de WebDAV"
 }

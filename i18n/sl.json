@@ -10,7 +10,6 @@
 	"webdav-default-edit-comment": "Urejeno z WebDav",
 	"webdav-default-delete-comment": "Izbrisano z WebDav",
 	"webdav-default-move-comment": "Prestavljeno z WebDav",
-	"prefs-webdav": "WebDAV",
 	"webdav-statictoken-prefs": "Statični URL WebDAV",
 	"webdav-statictoken-prefs-help": "Uporabite ta URL za namestitev omrežnega pogona WebDAV"
 }
