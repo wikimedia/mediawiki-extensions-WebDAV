@@ -5,7 +5,7 @@
 		]
 	},
 	"webdav-statictoken-prefs-help": "יש להשתמש בכתוב ה־URL הזאת כדי להרכיב כונן רשת WebDAV",
-	"webdav-desc": "מוסיף נקודת קצה של WebDAV שחושפת את תוכן הוויקי",
+	"webdav-desc": "הוספת נקודת קצה של WebDAV שחושפת את תוכן הוויקי",
 	"webdavmanager": "מנהל WebDAV",
 	"webdav-ns-main": "(דפים)",
 	"webdav-default-edit-comment": "נערך באמצעות WebDAV",
