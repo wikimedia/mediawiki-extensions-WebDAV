@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Gomoko"
+			"Gomoko",
+			"Verdy p"
 		]
 	},
 	"webdav-desc": "Ajoute un point de terminaison WebDAV qui expose le contenu du wiki",
