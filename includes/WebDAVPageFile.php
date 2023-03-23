@@ -75,7 +75,7 @@ class WebDAVPageFile extends Sabre\DAV\File {
 	 */
 	public function get() {
 		$content = $this->getWikiPage()->getContent();
-		return ContentHandler::getContentText( $content );
+		return ( $content instanceof TextContent ) ? $content->getText() : '';
 	}
 
 	/**
