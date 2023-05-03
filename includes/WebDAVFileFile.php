@@ -252,6 +252,11 @@ class WebDAVFileFile extends Sabre\DAV\File {
 			$updater->setContent( SlotRecord::MAIN, new WikitextContent( '' ) );
 			$updater->saveRevision( $comment );
 
+			$page->doSecondaryDataUpdates( [
+				'triggeringUser' => $user,
+				'defer' => DeferredUpdates::POSTSEND
+			] );
+
 			$hookContainer->run( 'WebDAVPublishToWikiDone', [ $repoFile, $sourceFilePath ] );
 		}
 	}
