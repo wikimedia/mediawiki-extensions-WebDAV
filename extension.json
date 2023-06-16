@@ -1,6 +1,6 @@
 {
 	"name": "WebDAV",
-	"version": "3.1.0",
+	"version": "4.0.0",
 	"author": [
 		"[https://www.hallowelt.com Hallo Welt! GmbH]",
 		"Robert Vogel (Hallo Welt! GmbH)",
@@ -11,7 +11,7 @@
 	"type": "other",
 	"license-name": "GPL-3.0-only",
 	"requires": {
-		"MediaWiki": ">= 1.37.0"
+		"MediaWiki": ">= 1.39.0"
 	},
 	"attributes": {
 		"BlueSpicePrivacy": {
