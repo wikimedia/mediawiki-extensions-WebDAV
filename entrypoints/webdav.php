@@ -60,8 +60,7 @@ try {
 	);
 
 	$server->start();
-}
-catch ( Exception $e ) {
+} catch ( Exception $e ) {
 	wfDebugLog(
 		'WebDAV',
 		'webdav.php: Exception: ' . $e->getMessage()
