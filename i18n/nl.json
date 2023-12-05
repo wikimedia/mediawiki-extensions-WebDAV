@@ -1,8 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Elroy"
+			"Elroy",
+			"McDutchie"
 		]
 	},
-	"webdav-ns-main": "(Pagina's)"
+	"webdav-desc": "Voegt een WebDAV-eindpunt toe dat de wiki-inhoud beschikbaar maakt",
+	"webdavmanager": "WebDAV-beheer",
+	"webdav-ns-main": "(Pagina's)",
+	"webdav-default-edit-comment": "Bewerkt via WebDAV",
+	"webdav-default-delete-comment": "Verwijderd via WebDAV",
+	"webdav-default-move-comment": "Hernoemd via WebDAV",
+	"webdav-statictoken-prefs": "Statische WebDAV-URL",
+	"webdav-statictoken-prefs-help": "Met deze URL koppelt u de WebDAV-netwerkdrive"
 }
