@@ -45,7 +45,7 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 	public function getChildren() {
 		$config = $this->services->getConfigFactory()->makeConfig( 'webdav' );
 
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = $this->services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 
 		$conds = [
 			'page_namespace' => $this->iNSId,
