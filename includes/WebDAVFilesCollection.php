@@ -1,7 +1,5 @@
 <?php
 
-use MediaWiki\MediaWikiServices;
-
 class WebDAVFilesCollection extends WebDAVPagesCollection {
 
 	/**
@@ -10,10 +8,9 @@ class WebDAVFilesCollection extends WebDAVPagesCollection {
 	 */
 	public function getChildren() {
 		// HINT: http://sabre.io/dav/character-encoding/
-		$config = \MediaWiki\MediaWikiServices::getInstance()
-			->getConfigFactory()->makeConfig( 'webdav' );
+		$config = $this->services->getConfigFactory()->makeConfig( 'webdav' );
 
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = $this->services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 		$fileQuery = LocalFile::getQueryInfo();
 		$res = $dbr->select(
 			$fileQuery['tables'],
@@ -27,7 +24,7 @@ class WebDAVFilesCollection extends WebDAVPagesCollection {
 		$children = [];
 
 		$regex = $config->get( 'WebDAVInvalidFileNameCharsRegEx' );
-		$localRepo = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo();
+		$localRepo = $this->services->getRepoGroup()->getLocalRepo();
 		foreach ( $res as $row ) {
 			if ( preg_match( $regex, $row->img_name ) !== 0 ) {
 				wfDebugLog( 'WebDAV', __METHOD__ . ': Invalid characters in ' . $row->img_name );
@@ -50,7 +47,7 @@ class WebDAVFilesCollection extends WebDAVPagesCollection {
 	 */
 	public function getChild( $name ) {
 		$normalName = str_replace( ' ', '_', $name );
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = $this->services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 		$fileQuery = LocalFile::getQueryInfo();
 		$row = $dbr->selectRow(
 			$fileQuery['tables'],
@@ -65,7 +62,7 @@ class WebDAVFilesCollection extends WebDAVPagesCollection {
 			wfDebugLog( 'WebDAV', __CLASS__ . ': ' . $msg );
 			throw new Sabre\DAV\Exception\NotFound( $msg );
 		}
-		$file = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()
+		$file = $this->services->getRepoGroup()->getLocalRepo()
 			->newFileFromRow( $row );
 		return new WebDAVFileFile( $file );
 	}

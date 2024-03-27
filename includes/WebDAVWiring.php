@@ -19,10 +19,10 @@ return [
 	'WebDAVTokenizer' => static function ( \MediaWiki\MediaWikiServices $services ) {
 		$config = $services->getMainConfig();
 
-		$db = wfGetDB( DB_PRIMARY );
+		$dbw = $services->getDBLoadBalancer()->getConnection( DB_PRIMARY );
 
 		return new WebDAVTokenizer(
-			$db,
+			$dbw,
 			$config->get( 'WebDAVTokenExpiration' ),
 			$config->get( 'WebDAVStaticTokenExpiration' ),
 			$config->get( 'WebDAVUserNameAsStaticToken' ),
