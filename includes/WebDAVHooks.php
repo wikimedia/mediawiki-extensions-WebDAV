@@ -3,30 +3,6 @@
 use MediaWiki\Extension\WebDAV\Extension as WebDAV;
 
 class WebDAVHooks {
-	/**
-	 * Adds the lock table to the database
-	 * @param DatabaseUpdater $updater
-	 * @return bool
-	 */
-	public static function onLoadExtensionSchemaUpdates( $updater ) {
-		$updater->addExtensionTable(
-			'webdav_locks',
-			dirname( __DIR__ ) . '/docs/webdav.locks.sql'
-		);
-		$updater->addExtensionTable(
-			'webdav_tokens',
-			dirname( __DIR__ ) . '/docs/webdav.tokens.sql'
-		);
-		$updater->addExtensionTable(
-			'webdav_static_tokens',
-			dirname( __DIR__ ) . '/docs/webdav.static.tokens.sql'
-		);
-		$updater->addExtensionTable(
-			'webdav_user_static_tokens',
-			dirname( __DIR__ ) . '/docs/webdav.user.static.tokens.sql'
-		);
-		return true;
-	}
 
 	/**
 	 * Registeres appropriate auth plugin

@@ -1,0 +1,24 @@
+[
+	{
+		"name": "webdav_user_static_tokens",
+		"columns": [
+			{
+				"name": "wdust_user_id",
+				"type": "integer",
+				"options": {
+					"notnull": true
+				}
+			},
+			{
+				"name": "wdust_token",
+				"type": "binary",
+				"options": {
+					"length": 255,
+					"notnull": true
+				}
+			}
+		],
+		"indexes": [],
+		"pk": []
+	}
+]
