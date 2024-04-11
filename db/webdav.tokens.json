@@ -1,0 +1,54 @@
+[
+	{
+		"name": "webdav_tokens",
+		"columns": [
+			{
+				"name": "wdt_id",
+				"type": "integer",
+				"options": {
+					"notnull": true,
+					"autoincrement": true
+				}
+			},
+			{
+				"name": "wdt_user_id",
+				"type": "integer",
+				"options": {
+					"notnull": true
+				}
+			},
+			{
+				"name": "wdt_filename",
+				"type": "binary",
+				"options": {
+					"length": 255,
+					"notnull": true
+				}
+			},
+			{
+				"name": "wdt_token",
+				"type": "binary",
+				"options": {
+					"length": 255,
+					"notnull": true
+				}
+			},
+			{
+				"name": "wdt_valid",
+				"type": "mwtinyint",
+				"options": {
+					"notnull": true
+				}
+			},
+			{
+				"name": "wdt_expire",
+				"type": "integer",
+				"options": {
+					"notnull": true
+				}
+			}
+		],
+		"indexes": [],
+		"pk": [ "wdt_id" ]
+	}
+]

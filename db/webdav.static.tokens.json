@@ -1,0 +1,39 @@
+[
+	{
+		"name": "webdav_static_tokens",
+		"columns": [
+			{
+				"name": "wdst_id",
+				"type": "integer",
+				"options": {
+					"notnull": true,
+					"autoincrement": true
+				}
+			},
+			{
+				"name": "wdst_user_id",
+				"type": "integer",
+				"options": {
+					"notnull": true
+				}
+			},
+			{
+				"name": "wdst_token",
+				"type": "binary",
+				"options": {
+					"length": 255,
+					"notnull": true
+				}
+			},
+			{
+				"name": "wdst_expire",
+				"type": "integer",
+				"options": {
+					"notnull": true
+				}
+			}
+		],
+		"indexes": [],
+		"pk": [ "wdst_id" ]
+	}
+]
