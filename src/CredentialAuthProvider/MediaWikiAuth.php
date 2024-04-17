@@ -14,8 +14,8 @@ class MediaWikiAuth implements WebDAVCredentialAuthProvider {
 	 * @inheritDoc
 	 */
 	public function getValidatedUser( $username, $password ) {
-		$username = utf8_encode( $username );
-		$password = utf8_encode( $password );
+		$username = mb_convert_encoding( $username, 'UTF-8', 'ISO-8859-1' );
+		$password = mb_convert_encoding( $password, 'UTF-8', 'ISO-8859-1' );
 
 		$services = MediaWikiServices::getInstance();
 		$manager = $services->getAuthManager();
