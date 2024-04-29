@@ -6,11 +6,11 @@
 	},
 	"webdav-desc": "Aggiunge 'nu punde di fine de WebDAV ca mette fore 'u condenute d'a uicchi",
 	"webdavmanager": "Gestore de WebDAV",
-	"webdav-ns-main": "(Pàggene)",
+	"webdav-ns-main": "(P\u00e0ggene)",
 	"webdav-default-edit-comment": "Cangiate cu WebDAV",
 	"webdav-default-delete-comment": "Scangellate cu WebDAV",
 	"webdav-default-move-comment": "Spustate cu WebDAV",
 	"prefs-webdav": "WebDAV",
 	"webdav-statictoken-prefs": "URL stateche de WebDAV",
-	"webdav-statictoken-prefs-help": "Ause sta URL pe mundà 'u drive de rezze de WebDAV"
+	"webdav-statictoken-prefs-help": "Ause sta URL pe mund\u00e0 'u drive de rezze de WebDAV"
 }

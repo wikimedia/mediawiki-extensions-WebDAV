@@ -1,7 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jon Harald Søby"
+			"Jon Harald S\u00f8by"
 		]
 	},
 	"webdav-desc": "Legger til et WebDAV-endepunkt som eksponerer wikiinnholdet",
@@ -12,5 +12,5 @@
 	"webdav-default-move-comment": "Flyttet via WebDAV",
 	"prefs-webdav": "WebDAV",
 	"webdav-statictoken-prefs": "WebDAV statisk URL",
-	"webdav-statictoken-prefs-help": "Bruk denne URL-en for å montere en WebDAV-nettverksdisk"
+	"webdav-statictoken-prefs-help": "Bruk denne URL-en for \u00e5 montere en WebDAV-nettverksdisk"
 }

@@ -4,10 +4,10 @@
 			"Ykhwong"
 		]
 	},
-	"webdavmanager": "WebDAV 관리자",
-	"webdav-ns-main": "(문서)",
-	"webdav-default-edit-comment": "WebDAV를 통해 편집됨",
-	"webdav-default-delete-comment": "WebDAV를 통해 삭제됨",
-	"webdav-default-move-comment": "WebDAV를 통해 이동됨",
+	"webdavmanager": "WebDAV \uad00\ub9ac\uc790",
+	"webdav-ns-main": "(\ubb38\uc11c)",
+	"webdav-default-edit-comment": "WebDAV\ub97c \ud1b5\ud574 \ud3b8\uc9d1\ub428",
+	"webdav-default-delete-comment": "WebDAV\ub97c \ud1b5\ud574 \uc0ad\uc81c\ub428",
+	"webdav-default-move-comment": "WebDAV\ub97c \ud1b5\ud574 \uc774\ub3d9\ub428",
 	"prefs-webdav": "WebDAV"
 }
