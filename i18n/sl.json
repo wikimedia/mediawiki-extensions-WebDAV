@@ -4,13 +4,13 @@
 			"Eleassar"
 		]
 	},
-	"webdav-desc": "Doda kon\u010dno to\u010dko WebDav, ki razkrije vsebino vikija",
+	"webdav-desc": "Doda končno točko WebDav, ki razkrije vsebino vikija",
 	"webdavmanager": "Upravitelj WebDav",
 	"webdav-ns-main": "(Strani)",
 	"webdav-default-edit-comment": "Urejeno z WebDav",
 	"webdav-default-delete-comment": "Izbrisano z WebDav",
 	"webdav-default-move-comment": "Prestavljeno z WebDav",
 	"prefs-webdav": "WebDAV",
-	"webdav-statictoken-prefs": "Stati\u010dni URL WebDAV",
-	"webdav-statictoken-prefs-help": "Uporabite ta URL za namestitev omre\u017enega pogona WebDAV"
+	"webdav-statictoken-prefs": "Statični URL WebDAV",
+	"webdav-statictoken-prefs-help": "Uporabite ta URL za namestitev omrežnega pogona WebDAV"
 }

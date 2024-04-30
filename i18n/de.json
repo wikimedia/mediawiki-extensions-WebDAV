@@ -4,12 +4,12 @@
 			"Mschlindwein"
 		]
 	},
-	"webdav-desc": "Stellt die Inhalte des Wikis \u00fcber einen WebDAV-Endpunkt zur Verf\u00fcgung",
+	"webdav-desc": "Stellt die Inhalte des Wikis über einen WebDAV-Endpunkt zur Verfügung",
 	"webdavmanager": "WebDAV Verwaltung",
 	"webdav-ns-main": "(Seiten)",
-	"webdav-default-edit-comment": "\u00dcber WebDAV bearbeitet",
-	"webdav-default-delete-comment": "\u00dcber WebDAV gel\u00f6scht",
-	"webdav-default-move-comment": "\u00dcber WebDAV verschoben",
+	"webdav-default-edit-comment": "Über WebDAV bearbeitet",
+	"webdav-default-delete-comment": "Über WebDAV gelöscht",
+	"webdav-default-move-comment": "Über WebDAV verschoben",
 	"prefs-webdav": "WebDAV",
 	"webdav-statictoken-prefs": "WebDAV statische URL",
 	"webdav-statictoken-prefs-help": "Verwende diese URL, um das WebDAV-Netzlaufwerk zu verbinden"

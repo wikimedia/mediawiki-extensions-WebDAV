@@ -4,13 +4,13 @@
 			"Hedda"
 		]
 	},
-	"webdav-desc": "Viki i\u00e7eri\u011fini g\u00f6steren bir WebDAV biti\u015f noktas\u0131 ekler",
-	"webdavmanager": "WebDAV y\u00f6neticisi",
+	"webdav-desc": "Viki içeriğini gösteren bir WebDAV bitiş noktası ekler",
+	"webdavmanager": "WebDAV yöneticisi",
 	"webdav-ns-main": "(Sayfalar)",
-	"webdav-default-edit-comment": "WebDAV ile d\u00fczenlendi",
+	"webdav-default-edit-comment": "WebDAV ile düzenlendi",
 	"webdav-default-delete-comment": "WebDAV ile silindi",
-	"webdav-default-move-comment": "WebDAV ile ta\u015f\u0131nd\u0131",
+	"webdav-default-move-comment": "WebDAV ile taşındı",
 	"prefs-webdav": "WebDAV",
 	"webdav-statictoken-prefs": "WebDAV statik URL",
-	"webdav-statictoken-prefs-help": "WebDAV a\u011f s\u00fcr\u00fcc\u00fcs\u00fcn\u00fc ba\u011flamak i\u00e7in bu URL'yi kullan\u0131n"
+	"webdav-statictoken-prefs-help": "WebDAV ağ sürücüsünü bağlamak için bu URL'yi kullanın"
 }

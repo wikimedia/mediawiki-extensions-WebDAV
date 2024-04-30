@@ -4,13 +4,13 @@
 			"Hamilton Abreu"
 		]
 	},
-	"webdav-desc": "Adiciona um ponto de termina\u00e7\u00e3o WebDAV que exp\u00f5e o conte\u00fado da wiki",
+	"webdav-desc": "Adiciona um ponto de terminação WebDAV que expõe o conteúdo da wiki",
 	"webdavmanager": "Gestor WebDAV",
-	"webdav-ns-main": "(P\u00e1ginas)",
-	"webdav-default-edit-comment": "Editada atrav\u00e9s do WebDAV",
-	"webdav-default-delete-comment": "Eliminada atrav\u00e9s do WebDAV",
-	"webdav-default-move-comment": "Movida atrav\u00e9s do WebDAV",
+	"webdav-ns-main": "(Páginas)",
+	"webdav-default-edit-comment": "Editada através do WebDAV",
+	"webdav-default-delete-comment": "Eliminada através do WebDAV",
+	"webdav-default-move-comment": "Movida através do WebDAV",
 	"prefs-webdav": "WebDAV",
-	"webdav-statictoken-prefs": "URL est\u00e1tico do WebDAV",
+	"webdav-statictoken-prefs": "URL estático do WebDAV",
 	"webdav-statictoken-prefs-help": "Usar este URL para montar a unidade de rede do WebDAV"
 }

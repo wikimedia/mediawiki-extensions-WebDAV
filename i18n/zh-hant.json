@@ -4,13 +4,13 @@
 			"Kly"
 		]
 	},
-	"webdav-desc": "\u6dfb\u52a0 WebDAV \u7aef\u9ede\u4f86\u63ed\u9732 wiki \u5167\u5bb9",
-	"webdavmanager": "WebDAV \u7ba1\u7406",
-	"webdav-ns-main": "\uff08\u9801\u9762\uff09",
-	"webdav-default-edit-comment": "\u900f\u904e WebDAV \u7de8\u8f2f",
-	"webdav-default-delete-comment": "\u900f\u904e WebDAV \u522a\u9664",
-	"webdav-default-move-comment": "\u900f\u904e WebDAV \u79fb\u52d5",
+	"webdav-desc": "添加 WebDAV 端點來揭露 wiki 內容",
+	"webdavmanager": "WebDAV 管理",
+	"webdav-ns-main": "（頁面）",
+	"webdav-default-edit-comment": "透過 WebDAV 編輯",
+	"webdav-default-delete-comment": "透過 WebDAV 刪除",
+	"webdav-default-move-comment": "透過 WebDAV 移動",
 	"prefs-webdav": "WebDAV",
-	"webdav-statictoken-prefs": "WebDAV \u975c\u614b URL",
-	"webdav-statictoken-prefs-help": "\u4f7f\u7528\u6b64 URL \u4f86\u639b\u8f09 WebDAV \u7db2\u8def\u78c1\u789f"
+	"webdav-statictoken-prefs": "WebDAV 靜態 URL",
+	"webdav-statictoken-prefs-help": "使用此 URL 來掛載 WebDAV 網路磁碟"
 }

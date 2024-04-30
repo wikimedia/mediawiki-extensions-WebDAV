@@ -5,13 +5,13 @@
 			"Eduardoaddad"
 		]
 	},
-	"webdav-desc": "Adiciona um ponto final WebDAV que exp\u00f5e o conte\u00fado do wiki",
+	"webdav-desc": "Adiciona um ponto final WebDAV que expõe o conteúdo do wiki",
 	"webdavmanager": "Gerente de WebDAV",
-	"webdav-ns-main": "(P\u00e1ginas)",
-	"webdav-default-edit-comment": "Editado atrav\u00e9s do WebDAV",
-	"webdav-default-delete-comment": "Exclu\u00eddo pelo WebDAV",
+	"webdav-ns-main": "(Páginas)",
+	"webdav-default-edit-comment": "Editado através do WebDAV",
+	"webdav-default-delete-comment": "Excluído pelo WebDAV",
 	"webdav-default-move-comment": "Movido pelo WebDAV",
 	"prefs-webdav": "WebDAV",
-	"webdav-statictoken-prefs": "URL est\u00e1tico do WebDAV",
+	"webdav-statictoken-prefs": "URL estático do WebDAV",
 	"webdav-statictoken-prefs-help": "Use este URL para montar a unidade de rede do WebDAV"
 }

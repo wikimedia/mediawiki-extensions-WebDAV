@@ -4,7 +4,7 @@
 			"Shirayuki"
 		]
 	},
-	"webdav-ns-main": "(\u30da\u30fc\u30b8)",
+	"webdav-ns-main": "(ページ)",
 	"prefs-webdav": "WebDAV",
-	"webdav-statictoken-prefs": "WebDAV \u56fa\u5b9a URL"
+	"webdav-statictoken-prefs": "WebDAV 固定 URL"
 }
