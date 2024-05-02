@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"沈澄心"
+		]
+	},
+	"webdavmanager": "WebDAV管理",
+	"webdav-ns-main": "（页面）",
+	"webdav-default-edit-comment": "通过WebDAV编辑",
+	"webdav-default-delete-comment": "通过WebDAV删除",
+	"webdav-default-move-comment": "通过WebDAV移动",
+	"webdav-statictoken-prefs": "WebDAV静态URL",
+	"webdav-statictoken-prefs-help": "使用此URL挂载WebDAV网络驱动器"
+}
