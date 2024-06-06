@@ -26,8 +26,6 @@ class WebDAVNamespacesCollection extends Sabre\DAV\Collection {
 	}
 
 	/**
-	 *
-	 * @global string $wgSitename
 	 * @return string
 	 */
 	public function getName() {

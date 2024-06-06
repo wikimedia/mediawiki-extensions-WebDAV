@@ -182,7 +182,6 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	/**
 	 * Adapted from BsFileSystemHelper::uploadLocalFile
 	 *
-	 * @global FileRepo $wgLocalFileRepo
 	 * @param string $sourceFilePath
 	 * @param string $targetFileName
 	 */

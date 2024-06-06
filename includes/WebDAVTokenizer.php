@@ -1,20 +1,28 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
+use Wikimedia\Rdbms\IDatabase;
 
 class WebDAVTokenizer {
+	/** @var User|null */
 	protected $oUser;
+	/** @var IDatabase */
 	protected $oDB;
+	/** @var string|null */
 	protected $sFilename;
+	/** @var string */
 	protected $sToken = '';
+	/** @var int */
 	protected $iTokenExpiration = 0;
+	/** @var int */
 	protected $iStaticTokenExpiration = 0;
+	/** @var bool */
 	protected $bUserNameAsStaticToken = false;
+	/** @var bool */
 	protected $bInvalidateOnUnlock = true;
 
 	/**
-	 *
-	 * @param Wikimedia\Rdbms\Database $db
+	 * @param IDatabase $db
 	 * @param int $tokenExpiration
 	 * @param int $staticTokenExpiration
 	 * @param bool $userNameAsStaticToken
@@ -264,7 +272,7 @@ class WebDAVTokenizer {
 	 * Retrieves or generates personalized token for user
 	 *
 	 * @param bool $retrieveOnly
-	 * @return bool
+	 * @return string|false
 	 */
 	public function getStaticToken( $retrieveOnly = false ) {
 		$res = $this->oDB->selectRow(
@@ -303,7 +311,7 @@ class WebDAVTokenizer {
 	 * Compares static token sent in request
 	 * with the one saved for that user
 	 *
-	 * @param type $staticToken
+	 * @param string $staticToken
 	 * @return bool
 	 */
 	public function checkStaticToken( $staticToken ) {

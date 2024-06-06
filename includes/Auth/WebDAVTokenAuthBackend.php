@@ -186,8 +186,6 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 	}
 
 	/**
-	 *
-	 * @global \User $wgUser
 	 * @param \User $user
 	 */
 	protected function doLogInUser( $user ) {
@@ -199,8 +197,6 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 	}
 
 	/**
-	 *
-	 * @global \User $wgUser
 	 * @param string $staticToken
 	 * @return bool
 	 */

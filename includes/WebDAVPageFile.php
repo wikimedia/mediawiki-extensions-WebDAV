@@ -135,8 +135,6 @@ class WebDAVPageFile extends Sabre\DAV\File {
 	}
 
 	/**
-	 *
-	 * @global WebRequest $wgRequest
 	 * @param resource $data
 	 */
 	public function put( $data ) {
