@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Volvox"
+		]
+	},
+	"webdav-ns-main": "(Säiten)",
+	"webdav-default-edit-comment": "Mat WebDAV geännert",
+	"webdav-default-delete-comment": "Mat WebDAV geläscht",
+	"webdav-default-move-comment": "Mat WebDAV geréckelt"
+}
