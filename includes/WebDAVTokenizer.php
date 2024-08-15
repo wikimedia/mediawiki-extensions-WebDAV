@@ -63,11 +63,10 @@ class WebDAVTokenizer {
 	/**
 	 *
 	 * @param string $filename
-	 * @return bool
 	 */
-	protected function checkForActiveTokens( $filename ) {
+	protected function checkForActiveTokens( $filename ): void {
 		if ( !$this->oUser instanceof User || $this->oUser->getId() === 0 ) {
-			return false;
+			return;
 		}
 		$conds = [
 			'wdt_expire > ' . wfTimestamp( TS_UNIX ),
@@ -79,9 +78,6 @@ class WebDAVTokenizer {
 				[ 'wdt_token' ],
 				$conds
 		);
-		if ( $res === false ) {
-			return null;
-		}
 		$this->sToken = $res->wdt_token;
 	}
 
@@ -116,11 +112,7 @@ class WebDAVTokenizer {
 		return MediaWikiServices::getInstance()->getUserFactory()->newFromId( $userId );
 	}
 
-	/**
-	 *
-	 * @return void
-	 */
-	protected function generateToken() {
+	protected function generateToken(): void {
 		if ( !$this->oUser instanceof User || $this->oUser->isRegistered() === false ) {
 			return;
 		}
@@ -133,7 +125,7 @@ class WebDAVTokenizer {
 		// Remove +/ suffix
 		$token = substr( $token, 0, -2 );
 		$expire = wfTimestamp( TS_UNIX, time() + $this->iTokenExpiration );
-		$res = $this->oDB->insert(
+		$this->oDB->insert(
 				'webdav_tokens',
 				[
 					'wdt_user_id' => $this->oUser->getId(),
@@ -143,9 +135,6 @@ class WebDAVTokenizer {
 					'wdt_expire' => $expire
 				]
 		);
-		if ( $res === false ) {
-			return;
-		}
 		$this->sToken = $token;
 	}
 
@@ -154,34 +143,31 @@ class WebDAVTokenizer {
 	 * file and current user
 	 *
 	 * @param string $filename
-	 * @return bool
 	 */
-	public function invalidateTokensForFile( $filename ) {
+	public function invalidateTokensForFile( $filename ): void {
 		if ( !$this->oUser instanceof User || $this->oUser->getId() === 0 ) {
-			return false;
+			return;
 		}
-		return $this->invalidateUserTokens( $this->oUser->getId(), $filename );
+		$this->invalidateUserTokens( $this->oUser->getId(), $filename );
 	}
 
 	/**
 	 *
 	 * @param int $userId
 	 * @param string $filename
-	 * @return bool
 	 */
-	protected function invalidateUserTokens( $userId, $filename = false ) {
+	protected function invalidateUserTokens( $userId, $filename = false ): void {
 		$conds = [
 			'wdt_user_id' => $userId
 		];
 		if ( $filename ) {
 			$conds[ 'wdt_filename' ] = $filename;
 		}
-		$res = $this->oDB->update(
+		$this->oDB->update(
 			'webdav_tokens',
 			[ 'wdt_valid' => 0 ],
 			$conds
 		);
-		return $res !== false;
 	}
 
 	/**
@@ -197,9 +183,8 @@ class WebDAVTokenizer {
 	 * Creates static-token session
 	 *
 	 * @param string $staticToken
-	 * @return bool
 	 */
-	public function addStaticToken( $staticToken ) {
+	public function addStaticToken( $staticToken ): void {
 		$expire = wfTimestamp( TS_UNIX, time() + $this->iStaticTokenExpiration );
 		$this->oDB->delete(
 			'webdav_static_tokens',
@@ -208,10 +193,10 @@ class WebDAVTokenizer {
 
 		$userToken = $this->getStaticToken( true );
 		if ( $userToken == false || $this->checkStaticToken( $staticToken ) == false ) {
-			return false;
+			return;
 		}
 
-		$res = $this->oDB->insert(
+		$this->oDB->insert(
 				'webdav_static_tokens',
 				[
 					'wdst_user_id' => $this->oUser->getId(),
@@ -219,10 +204,6 @@ class WebDAVTokenizer {
 					'wdst_expire' => $expire
 				]
 		);
-		if ( $res === false ) {
-			return false;
-		}
-		return true;
 	}
 
 	/**
@@ -241,31 +222,22 @@ class WebDAVTokenizer {
 					'wdst_expire > ' . wfTimestamp( TS_UNIX )
 				]
 		);
-		if ( $res === false ) {
-			return null;
-		}
 		$userId = $res->wdst_user_id;
 		return MediaWikiServices::getInstance()->getUserFactory()->newFromId( $userId );
 	}
 
 	/**
 	 * Renews static token on every request
-	 *
-	 * @return bool
 	 */
-	public function renewStaticToken() {
+	public function renewStaticToken(): void {
 		$expire = wfTimestamp( TS_UNIX, time() + $this->iStaticTokenExpiration );
-		$res = $this->oDB->update(
+		$this->oDB->update(
 				'webdav_static_tokens',
 				[ 'wdst_expire' => $expire ],
 				[
 					'wdst_user_id' => $this->oUser->getId()
 				]
 		);
-		if ( $res === false ) {
-			return false;
-		}
-		return true;
 	}
 
 	/**

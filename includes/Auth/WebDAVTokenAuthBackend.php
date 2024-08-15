@@ -162,7 +162,7 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 		}
 
 		if ( $staticToken ) {
-			$res = $this->addStaticToken( $staticToken );
+			$this->addStaticToken( $staticToken );
 		}
 
 		return [ true, $this->sPrincipalPrefix . $creds[0] ];
@@ -217,14 +217,12 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 	/**
 	 *
 	 * @param string $staticToken
-	 * @return bool
 	 */
-	protected function addStaticToken( $staticToken ) {
+	protected function addStaticToken( $staticToken ): void {
 		$this->oWebDAVTokenizer->setUser(
 			$this->oRequestContext->getUser()
 		);
-		$res = $this->oWebDAVTokenizer->addStaticToken( $staticToken );
-		return $res;
+		$this->oWebDAVTokenizer->addStaticToken( $staticToken );
 	}
 
 	/**
