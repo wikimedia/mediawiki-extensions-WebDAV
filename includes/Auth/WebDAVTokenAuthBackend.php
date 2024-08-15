@@ -231,7 +231,7 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 	 *
 	 * @param string $staticToken
 	 * @param \User $user
-	 * @return string
+	 * @return bool
 	 */
 	protected function checkStaticToken( $staticToken, $user ) {
 		$this->oWebDAVTokenizer->setUser( $user );
