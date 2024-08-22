@@ -140,7 +140,7 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 			$name = implode( '.', $nameParts );
 		}
 		$title = Title::makeTitle( $this->iNSId, $this->sBasePath . $name );
-		if ( $title instanceof Title === false ) {
+		if ( !$title ) {
 			$msg = 'Error creating page ' . $this->sBasePath . $name . ' in NS ' . $this->iNSId;
 			wfDebugLog( 'WebDAV', __CLASS__ . ': ' . $msg );
 			throw new Sabre\DAV\Exception\Forbidden( $msg );
