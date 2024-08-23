@@ -54,8 +54,13 @@
 		"WebDAVHelper": "includes/WebDAVHelper.php",
 		"WebDAVTempFilePlugin": "includes/WebDAVTempFilePlugin.php"
 	},
+	"HookHandlers": {
+		"runDatabaseUpdates": {
+			"class": "MediaWiki\\Extension\\WebDAV\\Hook\\RunDatabaseUpdates"
+		}
+	},
 	"Hooks": {
-		"LoadExtensionSchemaUpdates": "WebDAVHooks::onLoadExtensionSchemaUpdates",
+		"LoadExtensionSchemaUpdates": "runDatabaseUpdates",
 		"WebDAVPlugins": "WebDAVHooks::onWebDAVPlugins",
 		"WebDAVLocksUnlock": "WebDAVHooks::onWebDAVLocksUnlock",
 		"GetPreferences": "WebDAVHooks::onGetPreferences"
