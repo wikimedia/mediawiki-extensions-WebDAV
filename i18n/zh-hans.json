@@ -4,6 +4,7 @@
 			"沈澄心"
 		]
 	},
+	"webdav-desc": "添加提供wiki内容的WebDAV端点",
 	"webdavmanager": "WebDAV管理",
 	"webdav-ns-main": "（页面）",
 	"webdav-default-edit-comment": "通过WebDAV编辑",
