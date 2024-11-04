@@ -9,6 +9,5 @@
 	"webdav-ns-main": "(Páginas)",
 	"webdav-default-edit-comment": "Editado mediante WebDAV",
 	"webdav-default-move-comment": "Trasladado mediante WebDAV",
-	"prefs-webdav": "WebDAV",
 	"webdav-statictoken-prefs": "URL estático de WebDAV"
 }
