@@ -94,6 +94,14 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	}
 
 	/**
+	 * Note: etag support seems to be required for MS Excel and MS Powerpoint
+	 * @return string
+	 */
+	public function getETag() {
+		return '"' . $this->oFile->getSha1() . '"';
+	}
+
+	/**
 	 *
 	 * @return File
 	 */
