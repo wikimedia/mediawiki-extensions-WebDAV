@@ -6,9 +6,13 @@ use MediaWiki\Revision\SlotRecord;
 
 class WebDAVPagesCollection extends Sabre\DAV\Collection {
 
+	/** @var Sabre\DAV\Node */
 	protected $oParent = null;
+	/** @var string */
 	protected $sName = '';
+	/** @var int */
 	protected $iNSId = null;
+	/** @var string */
 	protected $sBasePath = '';
 
 	/**

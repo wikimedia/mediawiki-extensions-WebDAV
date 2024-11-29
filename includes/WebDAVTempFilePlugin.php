@@ -36,12 +36,13 @@ class WebDAVTempFilePlugin extends \Sabre\DAV\TemporaryFileFilterPlugin {
 	 *
 	 * @param RequestInterface $request
 	 * @param ResponseInterface $response
-	 * @return bool
+	 * @return mixed
 	 */
 	public function beforeMethod( RequestInterface $request, ResponseInterface $response ) {
 		$tempLocation = $this->isTempFile( $request->getPath() );
 		if ( !$tempLocation ) {
-			return false;
+			// somehow we have to return 'null' here, not 'false'
+			return;
 		}
 		switch ( $request->getMethod() ) {
 			case 'GET':
