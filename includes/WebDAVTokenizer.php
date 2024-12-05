@@ -87,7 +87,7 @@ class WebDAVTokenizer {
 	 *
 	 * @param string $token
 	 * @param string $url
-	 * @return User
+	 * @return User|null
 	 */
 	public function getUserFromTokenAndUrl( $token, $url ) {
 		$this->sFilename = WebDAVHelper::getFilenameFromUrl( $url );
@@ -222,6 +222,9 @@ class WebDAVTokenizer {
 					'wdst_expire > ' . wfTimestamp( TS_UNIX )
 				]
 		);
+		if ( !$res ) {
+			return null;
+		}
 		$userId = $res->wdst_user_id;
 		return MediaWikiServices::getInstance()->getUserFactory()->newFromId( $userId );
 	}
