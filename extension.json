@@ -87,6 +87,9 @@
 		"WebDAVSkipTalkNS": {
 			"value": false
 		},
+		"WebDAVOnlyContentNS": {
+			"value": true
+		},
 		"WebDAVSkipNamespaces": {
 			"value": [ -1, 2600 ]
 		},
