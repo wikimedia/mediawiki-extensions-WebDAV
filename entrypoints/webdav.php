@@ -1,5 +1,9 @@
 <?php
 
+use MediaWiki\Logger\LoggerFactory;
+use Psr\Log\LoggerAwareInterface;
+use Sabre\DAV\Xml\Property\LockDiscovery;
+
 // So extensions (and other code) can check whether they're running in WebDAV mode
 define( 'WEBDAV', true );
 define( 'MW_ENTRY_POINT', 'webdav' );
@@ -12,16 +16,22 @@ if ( isset( $_SERVER['MW_COMPILED'] ) ) {
 	chdir( $baseDir );
 	require $baseDir . '/includes/WebStart.php';
 }
-
 use MediaWiki\MediaWikiServices;
 use Sabre\DAV;
 
 $services = MediaWikiServices::getInstance();
 
-# \Sabre\DAV\Property\LockDiscovery::$hideLockRoot = true; //This is if Microsoft Office has issues;
-#  See http://sabre.io/dav/clients/msoffice/
 try {
 	$config = $services->getConfigFactory()->makeConfig( 'webdav' );
+	$logger = LoggerFactory::getInstance( 'WebDAV' );
+	$context = RequestContext::getMain();
+
+	if ( $config->get( 'WebDAVHideLockRoot' ) ) {
+		// This is if Microsoft Office has issues;
+		// See http://sabre.io/dav/clients/msoffice/
+		LockDiscovery::$hideLockRoot = true;
+	}
+
 	$rootNode = $config->get( 'WebDAVRootNode' );
 	$server = new DAV\Server( new $rootNode() );
 	$server->setBaseUri( $config->get( 'WebDAVBaseUri' ) );
@@ -39,36 +49,30 @@ try {
 	$hookContainer = $services->getHookContainer();
 	$hookContainer->run( 'WebDAVPlugins', [ $server, &$plugins ] );
 	foreach ( $plugins as $pluginkey => $plugin ) {
+		$logger->debug(
+			'Adding plugin: ' . $pluginkey . '; class: ' . get_class( $plugin )
+		);
+		if ( $plugin instanceof LoggerAwareInterface ) {
+			$plugin->setLogger( $logger );
+		}
 		$server->addPlugin( $plugin );
 	}
 
-	wfDebugLog(
-		'WebDAV',
-		'---------------------------------------------------------------------------'
-	);
-	wfDebugLog(
-		'WebDAV',
-		'webdav.php: Starting server for user ' . RequestContext::getMain()->getUser()->getName()
-	);
-	wfDebugLog(
-		'WebDAV',
-		'webdav.php: URL: ' . RequestContext::getMain()->getRequest()->getRequestURL()
-	);
-	wfDebugLog(
-		'WebDAV',
-		'webdav.php: User agent: ' . $_SERVER['HTTP_USER_AGENT']
-	);
+	$logger->debug( 'Base URI: ' . $server->getBaseUri() );
+	$logger->debug( 'Root node type: ' . $rootNode );
+	$logger->debug( 'User: ' . $context->getUser()->getName() );
+	$logger->debug( 'URL: ' . $context->getRequest()->getRequestURL() );
+	$logger->debug( 'User agent: ' . $_SERVER['HTTP_USER_AGENT'] );
 
 	$server->start();
 } catch ( Exception $e ) {
-	wfDebugLog(
-		'WebDAV',
-		'webdav.php: Exception: ' . $e->getMessage()
+	$logger->error(
+		'Exception: ' . $e->getMessage(),
+		[ 'exception' => $e ]
 	);
 	if ( $e instanceof MWException ) {
-		wfDebugLog( 'WebDAV', $e->getText() );
+		$logger->error( $e->getText() );
 	}
-	wfDebugLog( 'WebDAV', var_export( $e->getTraceAsString(), true ) );
 	# throw $e;
 }
 
