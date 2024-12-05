@@ -117,6 +117,10 @@
 		"WebDAVCredentialAuthProvider": {
 			"description": "Which of the registered credential auth providers to use",
 			"value": "mw-auth"
+		},
+		"WebDAVHideLockRoot": {
+			"description": "This is if Microsoft Office has issues",
+			"value": false
 		}
 	},
 	"load_composer_autoloader": true,
