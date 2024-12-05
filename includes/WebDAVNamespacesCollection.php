@@ -80,6 +80,13 @@ class WebDAVNamespacesCollection extends Sabre\DAV\Collection {
 				continue;
 			}
 
+			if ( !$namespaceInfo->isContent( $nsId )
+					&& $config->get( 'WebDAVOnlyContentNS' )
+					&& $nsId !== NS_MEDIA
+				) {
+				continue;
+			}
+
 			$dummyTitle = Title::makeTitle( $nsId, 'X' );
 			if ( !$mwServices->getPermissionManager()
 					->userCan( 'read', $user, $dummyTitle )
