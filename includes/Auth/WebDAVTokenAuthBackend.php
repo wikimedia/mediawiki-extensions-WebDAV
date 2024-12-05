@@ -76,7 +76,7 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 			if ( $this->oRequestContext->getUser()->isRegistered() ) {
 				if ( $staticToken ) {
 					$this->oWebDAVTokenizer->setUser( $this->oRequestContext->getUser() );
-					$this->oWebDAVTokenizer->renewStaticToken( $staticToken );
+					$this->oWebDAVTokenizer->renewStaticToken();
 				}
 				return [ true, $this->sPrincipalPrefix . $this->oRequestContext->getUser()->getName() ];
 			}
@@ -141,12 +141,6 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 		);
 
 		$creds = $auth->getCredentials();
-		// Do not try to login same user again
-		if ( $this->oRequestContext->getUser()->getName() === $creds[0]
-				&& $this->oRequestContext->getUser()->isRegistered() ) {
-			return [ true, $this->sPrincipalPrefix . $creds[0] ];
-		}
-
 		if ( !$creds ) {
 			if ( $staticToken && $this->tryLoginFromStaticToken( $staticToken ) ) {
 				return [ true, $this->sPrincipalPrefix .
@@ -155,6 +149,12 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 			$auth->requireLogin();
 			return [ false, "No 'Authorization: Basic' header found. Either the client didn't "
 				. "send one, or the server is misconfigured" ];
+		}
+
+		// Do not try to login same user again
+		if ( $this->oRequestContext->getUser()->getName() === $creds[0]
+				&& $this->oRequestContext->getUser()->isRegistered() ) {
+			return [ true, $this->sPrincipalPrefix . $creds[0] ];
 		}
 
 		if ( !$this->validateUserPass( $creds[0], $creds[1] ) ) {
