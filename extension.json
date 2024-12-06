@@ -109,7 +109,7 @@
 			"value": 86400
 		},
 		"WebDAVTokenExpiration": {
-			"value": 2
+			"value": 5
 		},
 		"WebDAVUserNameAsStaticToken": {
 			"value": false

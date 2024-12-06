@@ -1,6 +1,8 @@
 <?php
 
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
+use Psr\Log\LoggerInterface;
 use Wikimedia\Rdbms\IDatabase;
 
 class WebDAVTokenizer {
@@ -20,6 +22,8 @@ class WebDAVTokenizer {
 	protected $bUserNameAsStaticToken = false;
 	/** @var bool */
 	protected $bInvalidateOnUnlock = true;
+	/** @var LoggerInterface */
+	private $logger;
 
 	/**
 	 * @param IDatabase $db
@@ -35,6 +39,16 @@ class WebDAVTokenizer {
 		$this->iStaticTokenExpiration = $staticTokenExpiration;
 		$this->bUserNameAsStaticToken = $userNameAsStaticToken;
 		$this->bInvalidateOnUnlock = $invalidateOnUnlock;
+		$logger = LoggerFactory::getInstance( 'WebDAV' );
+		$this->setLogger( $logger );
+	}
+
+	/**
+	 * @param LoggerInterface $logger
+	 * @return void
+	 */
+	public function setLogger( LoggerInterface $logger ): void {
+		$this->logger = $logger;
 	}
 
 	/**
@@ -125,6 +139,7 @@ class WebDAVTokenizer {
 		// Remove +/ suffix
 		$token = substr( $token, 0, -2 );
 		$expire = wfTimestamp( TS_UNIX, time() + $this->iTokenExpiration );
+		$this->logger->debug( 'Generated token: ' . $token . ' that expires at: ' . $expire );
 		$this->oDB->insert(
 				'webdav_tokens',
 				[
