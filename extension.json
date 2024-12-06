@@ -104,11 +104,11 @@
 			"description": "Defaults to 30 minutes",
 			"value": 1800
 		},
-		"WebDAVTokenExpiration": {
+		"WebDAVStaticTokenExpiration": {
 			"description": "Defaults to 24 hours",
 			"value": 86400
 		},
-		"WebDAVStaticTokenExpiration": {
+		"WebDAVTokenExpiration": {
 			"value": 2
 		},
 		"WebDAVUserNameAsStaticToken": {
