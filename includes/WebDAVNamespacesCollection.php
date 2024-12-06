@@ -96,7 +96,12 @@ class WebDAVNamespacesCollection extends Sabre\DAV\Collection {
 
 			$name = $namespaceInfo->getCanonicalName( $nsId );
 			if ( $nsId == NS_MAIN ) {
-				$name = wfMessage( 'webdav-ns-main' )->plain();
+				// When mounting the wiki as a WebDAV drive one will see e.g.
+				// webdav/stk0a1b2c3d4e5f/<webdav-ns-main>/Main_Page.wiki
+				// but in the Media folder for attachments one will see e.g.
+				// webdav/stk0a1b2c3d4e5f/Media/<nsfilerepo-nsmain>/Example.docx
+				// These two message keys are not necessarily the same.
+				$name = $context->msg( 'webdav-ns-main' )->plain();
 			}
 
 			$namespaceIds[$nsId] = str_replace( ' ', '_', $name );
