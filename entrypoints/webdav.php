@@ -30,6 +30,7 @@ try {
 		// This is if Microsoft Office has issues;
 		// See http://sabre.io/dav/clients/msoffice/
 		LockDiscovery::$hideLockRoot = true;
+		$logger->debug( 'Hiding lock root' );
 	}
 
 	$rootNode = $config->get( 'WebDAVRootNode' );
@@ -48,15 +49,15 @@ try {
 
 	$hookContainer = $services->getHookContainer();
 	$hookContainer->run( 'WebDAVPlugins', [ $server, &$plugins ] );
+	$addingPlugins = [];
 	foreach ( $plugins as $pluginkey => $plugin ) {
-		$logger->debug(
-			'Adding plugin: ' . $pluginkey . '; class: ' . get_class( $plugin )
-		);
+		$addingPlugins[] = [ $pluginkey => get_class( $plugin ) ];
 		if ( $plugin instanceof LoggerAwareInterface ) {
 			$plugin->setLogger( $logger );
 		}
 		$server->addPlugin( $plugin );
 	}
+	$logger->debug( 'Plugins added: ', $addingPlugins );
 
 	$logger->debug( 'Base URI: ' . $server->getBaseUri() );
 	$logger->debug( 'Root node type: ' . $rootNode );

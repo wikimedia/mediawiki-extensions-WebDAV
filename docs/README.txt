@@ -54,6 +54,11 @@ or for token auth:
 
 $wgWebDAVAuthType = 'token';
 
+If token-based authentication falls back to basic auth immediately, you might need a longer token expiration time.
+The default value is 5 seconds, but for server or connection that runs slowlier, you can set for example:
+
+$wgWebDAVTokenExpiration = 10;
+
 ==Notes==
 * Multi-upload works
 * When a new Media-File is created a 0 byte version will be published at first and then be overwritten by the correct one.

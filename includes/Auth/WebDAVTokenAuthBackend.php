@@ -1,11 +1,14 @@
 <?php
 
 use MediaWiki\Extension\WebDAV\WebDAVCredentialAuthProvider;
+use MediaWiki\Logger\LoggerFactory;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerInterface;
 use Sabre\DAV\Auth\Backend\BackendInterface;
 use Sabre\HTTP\RequestInterface;
 use Sabre\HTTP\ResponseInterface;
 
-class WebDAVTokenAuthBackend implements BackendInterface {
+class WebDAVTokenAuthBackend implements BackendInterface, LoggerAwareInterface {
 
 	/**
 	 *
@@ -34,6 +37,11 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 	protected $credentialAuthProvider;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 *
 	 * @param RequestContext $requestContext
 	 * @param WebDAVTokenizer $webDAVTokenizer
@@ -45,6 +53,16 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 		$this->oRequestContext = $requestContext;
 		$this->oWebDAVTokenizer = $webDAVTokenizer;
 		$this->credentialAuthProvider = $credentialAuthProvider;
+		$logger = LoggerFactory::getInstance( 'WebDAV' );
+		$this->setLogger( $logger );
+	}
+
+	/**
+	 * @param LoggerInterface $logger
+	 * @return void
+	 */
+	public function setLogger( LoggerInterface $logger ): void {
+		$this->logger = $logger;
 	}
 
 	/**
@@ -72,6 +90,7 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 		$token = $this->getAndRemoveToken( $request );
 
 		if ( empty( $token ) ) {
+			$this->logger->debug( 'No tkn token found in URL, trying stk token...' );
 			$staticToken = $this->getAndRemoveToken( $request, 'stk' );
 			if ( $this->oRequestContext->getUser()->isRegistered() ) {
 				if ( $staticToken ) {
@@ -82,10 +101,13 @@ class WebDAVTokenAuthBackend implements BackendInterface {
 			}
 
 			return $this->tryBasicAuthLogin( $request, $response, $staticToken );
+		} elseif ( $this->oRequestContext->getUser()->isRegistered() ) {
+			return [ true, $this->sPrincipalPrefix . $this->oRequestContext->getUser()->getName() ];
 		}
 
 		$user = $this->oWebDAVTokenizer->getUserFromTokenAndUrl( $token, $request->getUrl() );
 		if ( $user === null ) {
+			$this->logger->debug( 'Failed to getUserFromTokenAndUrl' );
 			return [ false, "User not valid" ];
 		}
 		$user->setCookies();
