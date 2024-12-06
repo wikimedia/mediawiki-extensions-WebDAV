@@ -159,7 +159,7 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 		$updater->setContent( SlotRecord::MAIN, $content );
 		$newRevision = $updater->saveRevision( $comment );
 
-		if ( $newRevision instanceof RevisionRecord ) {
+		if ( $newRevision instanceof RevisionRecord === false ) {
 			$msg = 'Error #2 creating page ' . $this->sBasePath . $name . ' in NS ' . $this->iNSId;
 			wfDebugLog( 'WebDAV', __CLASS__ . ': ' . $msg );
 			throw new Sabre\DAV\Exception\Forbidden( $msg );
