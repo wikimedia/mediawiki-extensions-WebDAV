@@ -152,7 +152,7 @@ class WebDAVPageFile extends Sabre\DAV\File {
 		$updater->setContent( SlotRecord::MAIN, $content );
 		$newRevision = $updater->saveRevision( $comment );
 
-		if ( $newRevision instanceof RevisionRecord ) {
+		if ( $newRevision instanceof RevisionRecord === false ) {
 			$msg = 'Error editing page ' . $this->getTitle()->getPrefixedText();
 			wfDebugLog( 'WebDAV', __CLASS__ . ': ' . $msg );
 			throw new Sabre\DAV\Exception\Forbidden( $msg );
