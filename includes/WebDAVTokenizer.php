@@ -78,7 +78,7 @@ class WebDAVTokenizer {
 				[ 'wdt_token' ],
 				$conds
 		);
-		$this->sToken = $res->wdt_token;
+		$this->sToken = $res ? $res->wdt_token : '';
 	}
 
 	/**
