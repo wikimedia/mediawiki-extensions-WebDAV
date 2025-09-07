@@ -5,19 +5,16 @@ use MediaWiki\Revision\SlotRecord;
 
 class WebDAVFileFile extends Sabre\DAV\File {
 	/**
-	 *
 	 * @var File
 	 */
 	protected $oFile = null;
 
 	/**
-	 *
 	 * @var Title
 	 */
 	protected $oTitle = null;
 
 	/**
-	 *
 	 * @var WikiPage
 	 */
 	protected $oWikiPage = null;
@@ -33,7 +30,6 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	protected $services = null;
 
 	/**
-	 *
 	 * @param File $file
 	 */
 	public function __construct( $file ) {
@@ -46,7 +42,6 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	}
 
 	/**
-	 *
 	 * @return Title
 	 */
 	public function getTitle() {
@@ -54,7 +49,6 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	}
 
 	/**
-	 *
 	 * @return WikiPage
 	 */
 	public function getWikiPage() {
@@ -62,7 +56,6 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	}
 
 	/**
-	 *
 	 * @return string
 	 */
 	public function getName() {
@@ -70,7 +63,6 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	}
 
 	/**
-	 *
 	 * @return int
 	 */
 	public function getSize() {
@@ -86,7 +78,6 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	}
 
 	/**
-	 *
 	 * @return string
 	 */
 	public function getContentType() {
@@ -102,7 +93,6 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	}
 
 	/**
-	 *
 	 * @return File
 	 */
 	public function getFileObj() {
@@ -110,7 +100,6 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	}
 
 	/**
-	 *
 	 * @return resource
 	 */
 	public function get() {
@@ -123,7 +112,6 @@ class WebDAVFileFile extends Sabre\DAV\File {
 	}
 
 	/**
-	 *
 	 * @param resource $data
 	 * @return void
 	 */

@@ -26,7 +26,6 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 	protected $services = null;
 
 	/**
-	 *
 	 * @param Sabre\DAV\Node $parent
 	 * @param string $name
 	 * @param int $nsId
@@ -43,7 +42,6 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 	}
 
 	/**
-	 *
 	 * @return Sabre\DAV\Node[]
 	 */
 	public function getChildren() {
@@ -110,7 +108,6 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 	}
 
 	/**
-	 *
 	 * @return string
 	 */
 	public function getName() {
@@ -118,7 +115,6 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 	}
 
 	/**
-	 *
 	 * @return string
 	 */
 	public function getPath() {
@@ -126,7 +122,6 @@ class WebDAVPagesCollection extends Sabre\DAV\Collection {
 	}
 
 	/**
-	 *
 	 * @param string $name
 	 * @param resource|null $data
 	 * @throws Sabre\DAV\Exception\Forbidden

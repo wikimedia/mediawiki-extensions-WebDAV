@@ -3,7 +3,6 @@
 class WebDAVFilesCollection extends WebDAVPagesCollection {
 
 	/**
-	 *
 	 * @return \WebDAVFileFile[]
 	 */
 	public function getChildren() {
@@ -68,7 +67,6 @@ class WebDAVFilesCollection extends WebDAVPagesCollection {
 	}
 
 	/**
-	 *
 	 * @param string $name
 	 * @param resource|null $data
 	 * @return void

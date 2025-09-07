@@ -11,25 +11,21 @@ use Sabre\HTTP\ResponseInterface;
 class WebDAVTokenAuthBackend implements BackendInterface, LoggerAwareInterface {
 
 	/**
-	 *
 	 * @var string
 	 */
 	protected $sRealm = '';
 
 	/**
-	 *
 	 * @var string
 	 */
 	protected $sPrincipalPrefix = 'principals/';
 
 	/**
-	 *
 	 * @var RequestContext
 	 */
 	protected $oRequestContext;
 
 	/**
-	 *
 	 * @var WebDAVTokenizer
 	 */
 	protected $oWebDAVTokenizer;
@@ -42,7 +38,6 @@ class WebDAVTokenAuthBackend implements BackendInterface, LoggerAwareInterface {
 	private $logger;
 
 	/**
-	 *
 	 * @param RequestContext $requestContext
 	 * @param WebDAVTokenizer $webDAVTokenizer
 	 * @param WebDAVCredentialAuthProvider $credentialAuthProvider
@@ -66,7 +61,6 @@ class WebDAVTokenAuthBackend implements BackendInterface, LoggerAwareInterface {
 	}
 
 	/**
-	 *
 	 * @param RequestInterface $request
 	 * @param ResponseInterface $response
 	 */
@@ -237,7 +231,6 @@ class WebDAVTokenAuthBackend implements BackendInterface, LoggerAwareInterface {
 	}
 
 	/**
-	 *
 	 * @param string $staticToken
 	 */
 	protected function addStaticToken( $staticToken ): void {
@@ -248,7 +241,6 @@ class WebDAVTokenAuthBackend implements BackendInterface, LoggerAwareInterface {
 	}
 
 	/**
-	 *
 	 * @param string $staticToken
 	 * @param \User $user
 	 * @return bool

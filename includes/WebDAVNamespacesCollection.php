@@ -3,7 +3,6 @@
 class WebDAVNamespacesCollection extends Sabre\DAV\Collection {
 
 	/**
-	 *
 	 * @return array of Nodes
 	 */
 	public function getChildren() {
@@ -34,7 +33,6 @@ class WebDAVNamespacesCollection extends Sabre\DAV\Collection {
 	}
 
 	/**
-	 *
 	 * @param int $nsId
 	 * @param string $name
 	 * @return Sabre\DAV\Node
@@ -52,7 +50,6 @@ class WebDAVNamespacesCollection extends Sabre\DAV\Collection {
 	}
 
 	/**
-	 *
 	 * @return int[]
 	 */
 	public static function getNamespaces() {

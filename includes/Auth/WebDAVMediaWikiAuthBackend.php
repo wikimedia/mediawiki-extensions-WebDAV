@@ -7,7 +7,6 @@ use MediaWiki\Extension\WebDAV\WebDAVCredentialAuthProvider;
 class WebDAVMediaWikiAuthBackend extends Sabre\DAV\Auth\Backend\AbstractBasic {
 
 	/**
-	 *
 	 * @var \IContextSource
 	 */
 	protected $requestContext = null;
@@ -15,7 +14,6 @@ class WebDAVMediaWikiAuthBackend extends Sabre\DAV\Auth\Backend\AbstractBasic {
 	protected $credentialAuthProvider;
 
 	/**
-	 *
 	 * @param \IContextSource $requestContext
 	 * @param WebDAVCredentialAuthProvider $credentialAuthProvider
 	 */
@@ -27,7 +25,6 @@ class WebDAVMediaWikiAuthBackend extends Sabre\DAV\Auth\Backend\AbstractBasic {
 	}
 
 	/**
-	 *
 	 * @param string $username
 	 * @param string $password
 	 * @return bool

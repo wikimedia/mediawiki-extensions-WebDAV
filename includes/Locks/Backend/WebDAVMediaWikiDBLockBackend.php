@@ -12,7 +12,6 @@ class WebDAVMediaWikiDBLockBackend extends \Sabre\DAV\Locks\Backend\AbstractBack
 	}
 
 	/**
-	 *
 	 * @param string $uri
 	 * @param bool $returnChildLocks
 	 * @return array
@@ -81,7 +80,6 @@ class WebDAVMediaWikiDBLockBackend extends \Sabre\DAV\Locks\Backend\AbstractBack
 	}
 
 	/**
-	 *
 	 * @param string $uri
 	 * @param \Sabre\DAV\Locks\LockInfo $lockInfo
 	 * @return bool
@@ -141,7 +139,6 @@ class WebDAVMediaWikiDBLockBackend extends \Sabre\DAV\Locks\Backend\AbstractBack
 	}
 
 	/**
-	 *
 	 * @param string $uri
 	 * @param \Sabre\DAV\Locks\LockInfo $lockInfo
 	 * @return bool
@@ -162,7 +159,6 @@ class WebDAVMediaWikiDBLockBackend extends \Sabre\DAV\Locks\Backend\AbstractBack
 	}
 
 	/**
-	 *
 	 * @param int $lockId
 	 * @return bool
 	 */

@@ -75,7 +75,6 @@ class WebDAVTokenizer {
 	}
 
 	/**
-	 *
 	 * @param string $filename
 	 */
 	protected function checkForActiveTokens( $filename ): void {
@@ -167,7 +166,6 @@ class WebDAVTokenizer {
 	}
 
 	/**
-	 *
 	 * @param int $userId
 	 * @param string $filename
 	 */

@@ -6,31 +6,26 @@ use MediaWiki\MediaWikiServices;
 class WebDAVUrlProvider {
 
 	/**
-	 *
 	 * @var WebRequest
 	 */
 	protected $oRequest;
 
 	/**
-	 *
 	 * @var string
 	 */
 	protected $sServer;
 
 	/**
-	 *
 	 * @var string
 	 */
 	protected $sWebDAVUrlBaseUri;
 
 	/**
-	 *
 	 * @var int
 	 */
 	protected $webDAVAuthType;
 
 	/**
-	 *
 	 * @var User
 	 */
 	protected $oUser;
@@ -41,7 +36,6 @@ class WebDAVUrlProvider {
 	protected $services = null;
 
 	/**
-	 *
 	 * @param string $server
 	 * @param string $webDAVUrlBaseUri
 	 * @param string $webDAVAuthType
@@ -59,7 +53,6 @@ class WebDAVUrlProvider {
 	}
 
 	/**
-	 *
 	 * @param Title $title
 	 * @return string
 	 */
@@ -80,7 +73,6 @@ class WebDAVUrlProvider {
 	}
 
 	/**
-	 *
 	 * @param string $filename
 	 * @return string
 	 */
