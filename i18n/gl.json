@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Toliño"
+		]
+	},
+	"webdav-desc": "Engade un extremo WebDAV que expón o contido do wiki",
+	"webdavmanager": "Xestor WebDAV",
+	"webdav-ns-main": "(Páxinas)",
+	"webdav-default-edit-comment": "Editado mediante WebDAV",
+	"webdav-default-delete-comment": "Eliminado mediante WebDAV",
+	"webdav-default-move-comment": "Movido mediante WebDAV",
+	"webdav-statictoken-prefs": "Enderezo URL estático de WebDAV",
+	"webdav-statictoken-prefs-help": "Usa este enderezo URL para montar a unidade de rede WebDAV"
+}
