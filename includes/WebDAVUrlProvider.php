@@ -2,6 +2,7 @@
 
 use MediaWiki\Extension\WebDAV\Extension as WebDAV;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 
 class WebDAVUrlProvider {
 

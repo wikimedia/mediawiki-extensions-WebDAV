@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\Title\Title;
+
 class WebDAVNamespacesCollection extends Sabre\DAV\Collection {
 
 	/**
