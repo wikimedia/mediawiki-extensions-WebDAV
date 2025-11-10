@@ -11,7 +11,7 @@
 	"type": "other",
 	"license-name": "GPL-3.0-only",
 	"requires": {
-		"MediaWiki": ">= 1.39.4"
+		"MediaWiki": ">= 1.41.0"
 	},
 	"attributes": {
 		"BlueSpicePrivacy": {
@@ -66,7 +66,7 @@
 		"GetPreferences": "WebDAVHooks::onGetPreferences"
 	},
 	"ConfigRegistry": {
-		"webdav": "GlobalVarConfig::newInstance"
+		"webdav": "MediaWiki\\Config\\GlobalVarConfig::newInstance"
 	},
 	"config": {
 		"WebDAVRootNode": {
