@@ -79,8 +79,6 @@ class WebDAVTokenAuthBackend implements BackendInterface, LoggerAwareInterface {
 	 * @return array
 	 */
 	public function check( RequestInterface $request, ResponseInterface $response ) {
-		global $wgUser;
-
 		$token = $this->getAndRemoveToken( $request );
 
 		if ( empty( $token ) ) {
@@ -106,7 +104,6 @@ class WebDAVTokenAuthBackend implements BackendInterface, LoggerAwareInterface {
 		}
 		$user->setCookies();
 		$this->oRequestContext->setUser( $user );
-		$wgUser = $user;
 
 		return [ true, $this->sPrincipalPrefix . $user->getName() ];
 	}
@@ -205,11 +202,8 @@ class WebDAVTokenAuthBackend implements BackendInterface, LoggerAwareInterface {
 	 * @param \User $user
 	 */
 	protected function doLogInUser( $user ) {
-		global $wgUser;
-
 		$user->setCookies();
 		$this->oRequestContext->setUser( $user );
-		$wgUser = $user;
 	}
 
 	/**
@@ -217,15 +211,12 @@ class WebDAVTokenAuthBackend implements BackendInterface, LoggerAwareInterface {
 	 * @return bool
 	 */
 	protected function tryLoginFromStaticToken( $staticToken ) {
-		global $wgUser;
-
 		$user = $this->oWebDAVTokenizer->getUserFromStaticToken( $staticToken );
 		if ( $user === null ) {
 			return false;
 		}
 		$user->setCookies();
 		$this->oRequestContext->setUser( $user );
-		$wgUser = $user;
 
 		return true;
 	}
