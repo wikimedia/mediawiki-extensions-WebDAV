@@ -1,12 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ykhwong"
+			"Ykhwong",
+			"Tensama0415"
 		]
 	},
+	"webdav-desc": "위키 콘텐츠를 노출하는 WebDAV 종단점을 추가합니다",
 	"webdavmanager": "WebDAV 관리자",
 	"webdav-ns-main": "(문서)",
 	"webdav-default-edit-comment": "WebDAV를 통해 편집됨",
 	"webdav-default-delete-comment": "WebDAV를 통해 삭제됨",
-	"webdav-default-move-comment": "WebDAV를 통해 이동됨"
+	"webdav-default-move-comment": "WebDAV를 통해 이동됨",
+	"webdav-statictoken-prefs": "WebDAV 정적 URL",
+	"webdav-statictoken-prefs-help": "이 URL를 사용하여 WebDAV 네트워크 드라이브를 설치합니다"
 }
