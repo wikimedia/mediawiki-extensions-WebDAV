@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Elroy",
-			"McDutchie"
+			"McDutchie",
+			"Siebrand"
 		]
 	},
 	"webdav-desc": "Voegt een WebDAV-eindpunt toe dat de wiki-inhoud beschikbaar maakt",
@@ -11,6 +12,6 @@
 	"webdav-default-edit-comment": "Bewerkt via WebDAV",
 	"webdav-default-delete-comment": "Verwijderd via WebDAV",
 	"webdav-default-move-comment": "Hernoemd via WebDAV",
-	"webdav-statictoken-prefs": "Statische WebDAV-URL",
+	"webdav-statictoken-prefs": "Statische WebDAV-url",
 	"webdav-statictoken-prefs-help": "Met deze URL koppelt u de WebDAV-netwerkdrive"
 }
