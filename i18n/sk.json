@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wizzard"
+		]
+	},
+	"webdav-desc": "Pridáva koncový bod WebDAV, ktorý sprístupňuje obsah wiki",
+	"webdavmanager": "Správca WebDAV",
+	"webdav-ns-main": "(Stránky)",
+	"webdav-default-edit-comment": "Upravené cez WebDAV",
+	"webdav-default-delete-comment": "Zmazané cez WebDAV",
+	"webdav-default-move-comment": "Presunuté cez WebDAV",
+	"webdav-statictoken-prefs": "Statická URL WebDAV",
+	"webdav-statictoken-prefs-help": "Túto URL použite na pripojenie sieťového disku WebDAV"
+}
