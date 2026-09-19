@@ -27,7 +27,6 @@
 			}
 		}
 	},
-	"callback": "\\MediaWiki\\Extension\\WebDAV\\Extension::onRegistration",
 	"ServiceWiringFiles": [
 		"includes/WebDAVWiring.php"
 	],
@@ -36,6 +35,7 @@
 			"i18n"
 		]
 	},
+	"load_composer_autoloader": true,
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\WebDAV\\": "src/"
 	},
@@ -54,6 +54,7 @@
 		"WebDAVHelper": "includes/WebDAVHelper.php",
 		"WebDAVTempFilePlugin": "includes/WebDAVTempFilePlugin.php"
 	},
+	"callback": "\\MediaWiki\\Extension\\WebDAV\\Extension::onRegistration",
 	"HookHandlers": {
 		"runDatabaseUpdates": {
 			"class": "MediaWiki\\Extension\\WebDAV\\Hook\\RunDatabaseUpdates"
@@ -126,6 +127,5 @@
 			"value": false
 		}
 	},
-	"load_composer_autoloader": true,
 	"manifest_version": 2
 }

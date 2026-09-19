@@ -21,49 +21,23 @@ class WebDAVTokenAuthBackend implements BackendInterface, LoggerAwareInterface {
 	protected $sPrincipalPrefix = 'principals/';
 
 	/**
-	 * @var RequestContext
-	 */
-	protected $oRequestContext;
-
-	/**
-	 * @var WebDAVTokenizer
-	 */
-	protected $oWebDAVTokenizer;
-	/** @var WebDAVCredentialAuthProvider */
-	protected $credentialAuthProvider;
-
-	/**
 	 * @var LoggerInterface
 	 */
 	private $logger;
 
-	/**
-	 * @param RequestContext $requestContext
-	 * @param WebDAVTokenizer $webDAVTokenizer
-	 * @param WebDAVCredentialAuthProvider $credentialAuthProvider
-	 */
 	public function __construct(
-		$requestContext, $webDAVTokenizer, WebDAVCredentialAuthProvider $credentialAuthProvider
+		private readonly RequestContext $requestContext,
+		private readonly WebDAVTokenizer $webDAVTokenizer,
+		private readonly WebDAVCredentialAuthProvider $credentialAuthProvider,
 	) {
-		$this->oRequestContext = $requestContext;
-		$this->oWebDAVTokenizer = $webDAVTokenizer;
-		$this->credentialAuthProvider = $credentialAuthProvider;
 		$logger = LoggerFactory::getInstance( 'WebDAV' );
 		$this->setLogger( $logger );
 	}
 
-	/**
-	 * @param LoggerInterface $logger
-	 * @return void
-	 */
 	public function setLogger( LoggerInterface $logger ): void {
 		$this->logger = $logger;
 	}
 
-	/**
-	 * @param RequestInterface $request
-	 * @param ResponseInterface $response
-	 */
 	public function challenge( RequestInterface $request, ResponseInterface $response ) {
 	}
 
@@ -84,26 +58,26 @@ class WebDAVTokenAuthBackend implements BackendInterface, LoggerAwareInterface {
 		if ( empty( $token ) ) {
 			$this->logger->debug( 'No tkn token found in URL, trying stk token...' );
 			$staticToken = $this->getAndRemoveToken( $request, 'stk' );
-			if ( $this->oRequestContext->getUser()->isRegistered() ) {
+			if ( $this->requestContext->getUser()->isRegistered() ) {
 				if ( $staticToken ) {
-					$this->oWebDAVTokenizer->setUser( $this->oRequestContext->getUser() );
-					$this->oWebDAVTokenizer->renewStaticToken();
+					$this->webDAVTokenizer->setUser( $this->requestContext->getUser() );
+					$this->webDAVTokenizer->renewStaticToken();
 				}
-				return [ true, $this->sPrincipalPrefix . $this->oRequestContext->getUser()->getName() ];
+				return [ true, $this->sPrincipalPrefix . $this->requestContext->getUser()->getName() ];
 			}
 
 			return $this->tryBasicAuthLogin( $request, $response, $staticToken );
-		} elseif ( $this->oRequestContext->getUser()->isRegistered() ) {
-			return [ true, $this->sPrincipalPrefix . $this->oRequestContext->getUser()->getName() ];
+		} elseif ( $this->requestContext->getUser()->isRegistered() ) {
+			return [ true, $this->sPrincipalPrefix . $this->requestContext->getUser()->getName() ];
 		}
 
-		$user = $this->oWebDAVTokenizer->getUserFromTokenAndUrl( $token, $request->getUrl() );
+		$user = $this->webDAVTokenizer->getUserFromTokenAndUrl( $token, $request->getUrl() );
 		if ( $user === null ) {
 			$this->logger->debug( 'Failed to getUserFromTokenAndUrl' );
 			return [ false, "User not valid" ];
 		}
 		$user->setCookies();
-		$this->oRequestContext->setUser( $user );
+		$this->requestContext->setUser( $user );
 
 		return [ true, $this->sPrincipalPrefix . $user->getName() ];
 	}
@@ -157,7 +131,7 @@ class WebDAVTokenAuthBackend implements BackendInterface, LoggerAwareInterface {
 		if ( !$creds ) {
 			if ( $staticToken && $this->tryLoginFromStaticToken( $staticToken ) ) {
 				return [ true, $this->sPrincipalPrefix .
-					$this->oRequestContext->getUser()->getName() ];
+					$this->requestContext->getUser()->getName() ];
 			}
 			$auth->requireLogin();
 			return [ false, "No 'Authorization: Basic' header found. Either the client didn't "
@@ -165,8 +139,8 @@ class WebDAVTokenAuthBackend implements BackendInterface, LoggerAwareInterface {
 		}
 
 		// Do not try to login same user again
-		if ( $this->oRequestContext->getUser()->getName() === $creds[0]
-				&& $this->oRequestContext->getUser()->isRegistered() ) {
+		if ( $this->requestContext->getUser()->getName() === $creds[0]
+				&& $this->requestContext->getUser()->isRegistered() ) {
 			return [ true, $this->sPrincipalPrefix . $creds[0] ];
 		}
 
@@ -203,7 +177,7 @@ class WebDAVTokenAuthBackend implements BackendInterface, LoggerAwareInterface {
 	 */
 	protected function doLogInUser( $user ) {
 		$user->setCookies();
-		$this->oRequestContext->setUser( $user );
+		$this->requestContext->setUser( $user );
 	}
 
 	/**
@@ -211,12 +185,12 @@ class WebDAVTokenAuthBackend implements BackendInterface, LoggerAwareInterface {
 	 * @return bool
 	 */
 	protected function tryLoginFromStaticToken( $staticToken ) {
-		$user = $this->oWebDAVTokenizer->getUserFromStaticToken( $staticToken );
+		$user = $this->webDAVTokenizer->getUserFromStaticToken( $staticToken );
 		if ( $user === null ) {
 			return false;
 		}
 		$user->setCookies();
-		$this->oRequestContext->setUser( $user );
+		$this->requestContext->setUser( $user );
 
 		return true;
 	}
@@ -225,10 +199,10 @@ class WebDAVTokenAuthBackend implements BackendInterface, LoggerAwareInterface {
 	 * @param string $staticToken
 	 */
 	protected function addStaticToken( $staticToken ): void {
-		$this->oWebDAVTokenizer->setUser(
-			$this->oRequestContext->getUser()
+		$this->webDAVTokenizer->setUser(
+			$this->requestContext->getUser()
 		);
-		$this->oWebDAVTokenizer->addStaticToken( $staticToken );
+		$this->webDAVTokenizer->addStaticToken( $staticToken );
 	}
 
 	/**
@@ -237,7 +211,7 @@ class WebDAVTokenAuthBackend implements BackendInterface, LoggerAwareInterface {
 	 * @return bool
 	 */
 	protected function checkStaticToken( $staticToken, $user ) {
-		$this->oWebDAVTokenizer->setUser( $user );
-		return $this->oWebDAVTokenizer->checkStaticToken( $staticToken );
+		$this->webDAVTokenizer->setUser( $user );
+		return $this->webDAVTokenizer->checkStaticToken( $staticToken );
 	}
 }

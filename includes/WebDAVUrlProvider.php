@@ -59,7 +59,7 @@ class WebDAVUrlProvider {
 	 */
 	public function getURL( Title $title ) {
 		$path = $this->services->getNamespaceInfo()->getCanonicalName( NS_MEDIA );
-		$filename = $title->getDBKey();
+		$filename = $title->getDBkey();
 
 		if ( $this->webDAVAuthType === WebDAV::WEBDAV_AUTH_TOKEN ) {
 			$sToken = $this->getToken( $filename );

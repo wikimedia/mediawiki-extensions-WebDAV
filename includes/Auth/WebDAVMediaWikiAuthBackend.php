@@ -2,26 +2,15 @@
 // HINT in SabreDAV 2.x there will be Sabre\DAV\Auth\Backend\BasicCallback
 // available as an alternative to this implemenation
 
+use MediaWiki\Context\MutableContext;
 use MediaWiki\Extension\WebDAV\WebDAVCredentialAuthProvider;
 
 class WebDAVMediaWikiAuthBackend extends Sabre\DAV\Auth\Backend\AbstractBasic {
 
-	/**
-	 * @var \IContextSource
-	 */
-	protected $requestContext = null;
-	/** @var WebDAVCredentialAuthProvider */
-	protected $credentialAuthProvider;
-
-	/**
-	 * @param \IContextSource $requestContext
-	 * @param WebDAVCredentialAuthProvider $credentialAuthProvider
-	 */
 	public function __construct(
-		$requestContext, WebDAVCredentialAuthProvider $credentialAuthProvider
+		private readonly MutableContext $requestContext,
+		private readonly WebDAVCredentialAuthProvider $credentialAuthProvider,
 	) {
-		$this->requestContext = $requestContext;
-		$this->credentialAuthProvider = $credentialAuthProvider;
 	}
 
 	/**
